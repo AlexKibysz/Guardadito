@@ -1,0 +1,61 @@
+@page "{id:guid}"
+@model Guardadito.Pages.Currency.Delete
+
+@{
+    ViewData["Title"] = "Eliminar Moneda";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">
+                <i class="fas fa-trash me-2"></i>Eliminar Moneda
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                ¿Está seguro que desea eliminar esta moneda? Esta acción no se puede deshacer.
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>Detalles de la Moneda</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Código:</dt>
+                        <dd class="col-sm-8">@Model.Currency.Code</dd>
+
+                        <dt class="col-sm-4">Nombre:</dt>
+                        <dd class="col-sm-8">@Model.Currency.Name</dd>
+
+                        <dt class="col-sm-4">Símbolo:</dt>
+                        <dd class="col-sm-8">@Model.Currency.Symbol</dd>
+
+                        <dt class="col-sm-4">Tipo de Cambio:</dt>
+                        <dd class="col-sm-8">@Model.Currency.ExchangeRate.ToString("N6")</dd>
+
+                        <dt class="col-sm-4">Estado:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.Currency.IsActive ? "success" : "danger")">
+                                @(Model.Currency.IsActive ? "Activo" : "Inactivo")
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <form method="post">
+                <input type="hidden" asp-for="Currency.Id" />
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/Currency" class="btn btn-secondary">
+                        <i class="fas fa-times me-2"></i>Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-2"></i>Eliminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

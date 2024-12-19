@@ -1,0 +1,192 @@
+@page
+@using Guardadito.Entity
+@model Guardadito.Pages.Currency.Index
+
+@{
+    ViewData["Title"] = "Gestión de Monedas";
+}
+
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">Gestión de Monedas</h1>
+            <p class="mb-0 text-muted">Administra las monedas del sistema</p>
+        </div>
+        <a href="/Currency/Create" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Nueva Moneda
+        </a>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="card shadow-sm mb-2">
+        <div class="card-body">
+            <form method="get" class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label">Búsqueda</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" asp-for="SearchTerm"
+                            placeholder="Buscar por nombre, código o símbolo...">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select" asp-for="IsActive">
+                        <option value="">Todos</option>
+                        <option value="true">Activos</option>
+                        <option value="false">Inactivos</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Registros por página</label>
+                    <select class="form-select" asp-for="PageSize">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-filter me-2"></i>Filtrar
+                        </button>
+                        <a href="/Currency" class="btn btn-outline-secondary">
+                            <i class="fas fa-undo me-2"></i>Limpiar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>
+                                <a class="text-decoration-none text-dark" asp-page="./Index"
+                                    asp-route-sortOrder="@Model.CodeSort">
+                                    Código
+                                    <i class="fas fa-sort ms-1"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="text-decoration-none text-dark" asp-page="./Index"
+                                    asp-route-sortOrder="@Model.NameSort">
+                                    Nombre
+                                    <i class="fas fa-sort ms-1"></i>
+                                </a>
+                            </th>
+                            <th>Símbolo</th>
+                            <th>
+                                <a class="text-decoration-none text-dark" asp-page="./Index"
+                                    asp-route-sortOrder="@Model.RateSort">
+                                    Tipo de Cambio
+                                    <i class="fas fa-sort ms-1"></i>
+                                </a>
+                            </th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var currency in Model.Currencies)
+                        {
+                            <tr>
+                                <td>@currency.Code</td>
+                                <td>@currency.Name</td>
+                                <td>@currency.Symbol</td>
+                                <td>@currency.ExchangeRate.ToString("N6")</td>
+                                <td>
+                                    <span class="badge bg-@(currency.IsActive ? "success" : "danger")">
+                                        @(currency.IsActive ? "Activo" : "Inactivo")
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="/Currency/Edit/@currency.Id" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="/Currency/Details/@currency.Id" class="btn btn-sm btn-outline-info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal@(currency.Id)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteModal@(currency.Id)" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Está seguro que desea eliminar la moneda @currency.Name
+                                                    (@currency.Code)?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="/Currency/Delete/@currency.Id"
+                                                        class="btn btn-danger">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            @if (Model.Currencies.TotalPages > 1)
+            {
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(!Model.Currencies.HasPreviousPage ? "disabled" : "")">
+                            <a class="page-link" asp-page="./Index"
+                                asp-route-currentPage="@(Model.CurrentPage - 1)">Anterior</a>
+                        </li>
+
+                        @for (var i = 1; i <= Model.Currencies.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                <a class="page-link" asp-page="./Index" asp-route-currentPage="@i">@i</a>
+                            </li>
+                        }
+
+                        <li class="page-item @(!Model.Currencies.HasNextPage ? "disabled" : "")">
+                            <a class="page-link" asp-page="./Index"
+                                asp-route-currentPage="@(Model.CurrentPage + 1)">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+        </div>
+    </div>
+</div>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @TempData["ErrorMessage"]
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}

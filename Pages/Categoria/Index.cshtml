@@ -1,0 +1,78 @@
+@page
+@model Guardadito.Pages.Categoria.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].TipoCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].Icono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].Presupuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].CategoriaPadre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria[0].UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Categoria) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Icono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Presupuesto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaPadre.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

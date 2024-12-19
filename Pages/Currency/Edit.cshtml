@@ -1,0 +1,93 @@
+@page "{id:guid}"
+@model Guardadito.Pages.Currency.Edit
+
+@{
+   ViewData["Title"] = "Editar Moneda";
+}
+
+<div class="container mt-5">
+   <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+         <h3 class="mb-0">
+            <i class="fas fa-edit me-2"></i>Editar Moneda
+         </h3>
+      </div>
+
+      <div class="card-body p-4">
+         <form method="post">
+            <input type="hidden" asp-for="CurrencyModel.Id" />
+
+            <div class="row mb-4">
+               <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                     <input type="text" class="form-control" asp-for="CurrencyModel.Code" placeholder="Código">
+                     <label asp-for="CurrencyModel.Code">Código (ej: USD)</label>
+                     <span asp-validation-for="CurrencyModel.Code" class="text-danger"></span>
+                  </div>
+               </div>
+
+               <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                     <input type="text" class="form-control" asp-for="CurrencyModel.Name" placeholder="Nombre">
+                     <label asp-for="CurrencyModel.Name">Nombre de la Moneda</label>
+                     <span asp-validation-for="CurrencyModel.Name" class="text-danger"></span>
+                  </div>
+               </div>
+
+               <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                     <input type="text" class="form-control" asp-for="CurrencyModel.Symbol" placeholder="Símbolo">
+                     <label asp-for="CurrencyModel.Symbol">Símbolo (ej: $)</label>
+                     <span asp-validation-for="CurrencyModel.Symbol" class="text-danger"></span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row mb-4">
+               <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                     <input type="number" class="form-control" asp-for="CurrencyModel.ExchangeRate"
+                        placeholder="Tipo de Cambio" step="0.000001">
+                     <label asp-for="CurrencyModel.ExchangeRate">Tipo de Cambio</label>
+                     <span asp-validation-for="CurrencyModel.ExchangeRate" class="text-danger"></span>
+                  </div>
+               </div>
+
+               <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                     <input type="date" class="form-control" asp-for="CurrencyModel.RateDate">
+                     <label asp-for="CurrencyModel.RateDate">Fecha del Tipo de Cambio</label>
+                     <span asp-validation-for="CurrencyModel.RateDate" class="text-danger"></span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row mb-4">
+               <div class="col-12">
+                  <div class="form-check form-switch">
+                     <input class="form-check-input" type="checkbox" asp-for="CurrencyModel.IsActive">
+                     <label class="form-check-label" asp-for="CurrencyModel.IsActive">
+                        Moneda Activa
+                     </label>
+                  </div>
+               </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+               <a href="/Currency" class="btn btn-secondary">
+                  <i class="fas fa-times me-2"></i>Cancelar
+               </a>
+               <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save me-2"></i>Guardar Cambios
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
+@section Scripts {
+   @{
+      await Html.RenderPartialAsync("_ValidationScriptsPartial");
+   }
+}

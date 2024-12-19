@@ -1,0 +1,98 @@
+
+classDiagram
+    %% Interfaces Base
+    class IEntity
+    class IRepository
+    class IFinancialService
+
+    %% Entidades Core
+    class Usuario {
+        +Nombre : string
+        +Email : string
+        +PasswordHash : string
+        +Rol : UserRole
+        +Configuracion : ConfiguracionUsuario
+    }
+
+    class ConfiguracionUsuario {
+        +MonedaPrincipal : Currency
+        +FormatoFecha : string
+        +NotificacionesActivas : bool
+        +PreferenciasVisualizacion : Dictionary
+    }
+
+    class Cuenta {
+        +Nombre : string
+        +TipoCuenta : AccountType
+        +SaldoActual : decimal
+        +SaldoDisponible : decimal
+        +MonedaPrincipal : Currency
+        +LimiteCredito : decimal
+        +FechaCorte : DateTime
+        +FechaPago : DateTime
+    }
+
+    class Transaccion {
+        +Monto : decimal
+        +MonedaOriginal : Currency
+        +MontoConvertido : decimal
+        +MonedaDestino : Currency
+        +Fecha : DateTime
+        +CategoriaId : Guid
+        +Etiquetas : List~string~
+        +Adjuntos : List~string~
+        +Recurrente : bool
+        +FrecuenciaRecurrencia : RecurrencyType
+    }
+
+    %% Nuevas Clases
+    class Categoria {
+        +Nombre : string
+        +TipoCategoria : CategoryType
+        +CategoriaPadreId : Guid?
+        +Icono : string
+        +Color : string
+        +Presupuesto : decimal
+    }
+
+    class Estadistica {
+        +Periodo : DateRange
+        +TipoEstadistica : StatType
+        +Datos : Dictionary
+        +GenerarReporte() : Report
+        +CalcularTendencias() : Trends
+    }
+
+    class Recordatorio {
+        +Titulo : string
+        +FechaVencimiento : DateTime
+        +TipoRecordatorio : ReminderType
+        +Estado : ReminderStatus
+        +Prioridad : Priority
+    }
+
+    %% Enums Adicionales
+    class RecurrencyType {
+        <<enumeration>>
+        Diaria
+        Semanal
+        Quincenal
+        Mensual
+        Anual
+    }
+
+    class ReminderType {
+        <<enumeration>>
+        PagoFactura
+        MetaAhorro
+        LimitePrespuesto
+        VencimientoTarjeta
+    }
+
+    %% Relaciones
+    Usuario "1" -- "*" Cuenta
+    Usuario "1" -- "*" Transaccion
+    Usuario "1" -- "1" ConfiguracionUsuario
+    Cuenta "1" -- "*" Transaccion
+    Transaccion "*" -- "1" Categoria
+    Usuario "1" -- "*" Recordatorio

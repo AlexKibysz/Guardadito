@@ -1,0 +1,296 @@
+@page
+@model Guardadito.Pages.Index
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="container-fluid mt-4">
+    <div class="d-flex flex-column">
+        <!-- Primera fila - Cartas -->
+        <div class="row g-4 justify-content-center">
+            <div class="col-12 col-md-3">
+                <div class="card" style="width: 100%;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card" style="width: 100%;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card" style="width: 100%;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card" style="width: 100%;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Segunda fila - Gráficos y Tabla -->
+        <div class="row g-3 mt-4">
+            <!-- Columna izquierda para la tabla -->
+            <div class="col-12 col-md-6 mb-4">
+                <div class="table-container"
+                    style="border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto;">
+                    <table id="personasTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Ciudad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var persona in Model.Personas)
+                            {
+                                <tr>
+                                    <td>@persona.Nombre</td>
+                                    <td>@persona.Edad</td>
+                                    <td>@persona.Ciudad</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Columna derecha para gráfico y dropdown -->
+            <div class="col-12 col-md-6">
+                <div class="graph-container mb-3" style="border: 1px solid #ccc; padding: 10px; height: 400px;">
+                    <canvas id="miPrimerGrafico" style="width: 100%; height: 100%;"></canvas>
+                    <canvas id="miSegundoGrafico" style="width: 100%; height: 100%; display: none;"></canvas>
+                    <canvas id="miTercerGrafico" style="width: 100%; height: 100%; display: none;"></canvas>
+                    <canvas id="miCuartoGrafico" style="width: 100%; height: 100%; display: none;"></canvas>
+                </div>
+
+                <div class="dropdown-container">
+                    <div class="btn-group w-100">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Selecciona un Gráfico
+                        </button>
+                        <ul class="dropdown-menu w-100">
+                            <li><a class="dropdown-item" href="#" id="showGraph1">Gráfico de Barras</a></li>
+                            <li><a class="dropdown-item" href="#" id="showGraph2">Gráfico de Líneas</a></li>
+                            <li><a class="dropdown-item" href="#" id="showGraph3">Gráfico de Pastel</a></li>
+                            <li><a class="dropdown-item" href="#" id="showGraph4">Gráfico de Radar</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dataTables_filter input {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px;
+        width: auto;
+    }
+
+    .container-fluid {
+        margin-top: 20px;
+        /* Ajusta este valor según sea necesario */
+    }
+
+    .card {
+        margin: 10px;
+        /* Ajusta este valor según sea necesario */
+    }
+</style>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Inicialización de DataTable
+            $('#personasTable').DataTable({
+                initComplete: function () {
+                    // Busca el input de búsqueda y aplica clases de Bootstrap
+                    $('div.dataTables_filter input').addClass('form-control form-control-sm');
+                    $('div.dataTables_filter label').addClass('form-label');
+                },
+                pageLength: 10,
+                language: {
+                    search: "Buscar:",
+                    lengthMenu: "_MENU_ registros",
+                    zeroRecords: "No se encontraron resultados",
+                    info: "_PAGE_ de _PAGES_",
+                    infoEmpty: "No hay registros disponibles",
+                    infoFiltered: "(filtrado de _MAX_ registros totales)",
+                    paginate: {
+                        first: "Primero",
+                        last: "Último",
+                        next: "Siguiente",
+                        previous: "Anterior"
+                    }
+                },
+                responsive: true
+            });
+
+            // Configurar la búsqueda
+            $('#searchButton').on('click', function () {
+                var searchTerm = $('#searchInput').val();
+                var table = $('#personasTable').DataTable();
+                table.search(searchTerm).draw();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gráfico de Barras
+            const ctx1 = document.getElementById('miPrimerGrafico').getContext('2d');
+            const primerChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Rojo', 'Azul', 'Verde'],
+                    datasets: [{
+                        label: 'Mis Datos',
+                        data: [12, 19, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Líneas
+            const ctx2 = document.getElementById('miSegundoGrafico').getContext('2d');
+            const segundoChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [12, 19, 3, 5, 2],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Gráfico de Pastel
+            const ctx3 = document.getElementById('miTercerGrafico').getContext('2d');
+            const tercerChart = new Chart(ctx3, {
+                type: 'pie',
+                data: {
+                    labels: ['Rojo', 'Azul', 'Verde'],
+                    datasets: [{
+                        label: 'Distribución',
+                        data: [10, 20, 30],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Gráfico de Radar
+            const ctx4 = document.getElementById('miCuartoGrafico').getContext('2d');
+            const cuartoChart = new Chart(ctx4, {
+                type: 'radar',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+                    datasets: [{
+                        label: 'Crecimiento',
+                        data: [20, 10, 30, 40, 50],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Manejo del cambio de gráficos
+            document.getElementById('showGraph1').addEventListener('click', function () {
+                document.getElementById('miPrimerGrafico').style.display = 'block';
+                document.getElementById('miSegundoGrafico').style.display = 'none';
+                document.getElementById('miTercerGrafico').style.display = 'none';
+                document.getElementById('miCuartoGrafico').style.display = 'none';
+                primerChart.resize();
+            });
+            document.getElementById('showGraph2').addEventListener('click', function () {
+                document.getElementById('miPrimerGrafico').style.display = 'none';
+                document.getElementById('miSegundoGrafico').style.display = 'block';
+                document.getElementById('miTercerGrafico').style.display = 'none';
+                document.getElementById('miCuartoGrafico').style.display = 'none';
+                segundoChart.resize();
+            });
+            document.getElementById('showGraph3').addEventListener('click', function () {
+                document.getElementById('miPrimerGrafico').style.display = 'none';
+                document.getElementById('miSegundoGrafico').style.display = 'none';
+                document.getElementById('miTercerGrafico').style.display = 'block';
+                document.getElementById('miCuartoGrafico').style.display = 'none';
+                tercerChart.resize();
+            });
+            document.getElementById('showGraph4').addEventListener('click', function () {
+                document.getElementById('miPrimerGrafico').style.display = 'none';
+                document.getElementById('miSegundoGrafico').style.display = 'none';
+                document.getElementById('miTercerGrafico').style.display = 'none';
+                document.getElementById('miCuartoGrafico').style.display = 'block';
+                cuartoChart.resize();
+            });
+        });
+    </script>
+}
