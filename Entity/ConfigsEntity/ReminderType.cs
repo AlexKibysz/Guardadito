@@ -1,5 +1,7 @@
+using Guardadito.Entity.Contracts;
+
 namespace Guardadito.Entity;
-public class ReminderType : BaseEntity
+public class ReminderType : BaseEntity, IConfigurationEntity
 {
    public string Name { get; set; }
 

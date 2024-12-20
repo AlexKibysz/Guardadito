@@ -1,44 +1,15 @@
 @page
 @model Guardadito.Pages.Config.TipoCategoria.CreateModel
+@{
+    ViewData["Title"] = "Nueva Tipo de Categoria";
+    ViewData["Icon"] = "fas fa-tags me-2";
+    ViewData["Placeholder"] = "Ingrese el Tipo de Categoria";
+}
 
-        @{
-        ViewData["Title"] = "Create";
-        }
-        
-        <h1>Create</h1>
-        
-    <h4>CategoryType</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CategoryType.Name" class="control-label"></label>
-                <input asp-for="CategoryType.Name" class="form-control" />
-                <span asp-validation-for="CategoryType.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryType.CreatedAt" class="control-label"></label>
-                <input asp-for="CategoryType.CreatedAt" class="form-control" />
-                <span asp-validation-for="CategoryType.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryType.UpdatedAt" class="control-label"></label>
-                <input asp-for="CategoryType.UpdatedAt" class="form-control" />
-                <span asp-validation-for="CategoryType.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+<partial name="~/Pages/Shared/CRUD/Create/_CreateConfigurationItemPartial.cshtml" model="Model.CategoryType" />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

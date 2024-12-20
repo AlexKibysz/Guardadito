@@ -1,44 +1,16 @@
 @page
 @model Guardadito.Pages.Config.TipoEstado.CreateModel
 
-        @{
-        ViewData["Title"] = "Create";
-        }
-        
-        <h1>Create</h1>
-        
-    <h4>StatType</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StatType.Name" class="control-label"></label>
-                <input asp-for="StatType.Name" class="form-control" />
-                <span asp-validation-for="StatType.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatType.CreatedAt" class="control-label"></label>
-                <input asp-for="StatType.CreatedAt" class="form-control" />
-                <span asp-validation-for="StatType.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatType.UpdatedAt" class="control-label"></label>
-                <input asp-for="StatType.UpdatedAt" class="form-control" />
-                <span asp-validation-for="StatType.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+@{
+    ViewData["Title"] = "Nuevo Tipo de Estado";
+    ViewData["Icon"] = "fas fa-tags me-2";
+    ViewData["Placeholder"] = "Ingrese el Tipo de Estado ej:";
+}
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+<partial name="~/Pages/Shared/CRUD/Create/_CreateConfigurationItemPartial.cshtml" model="Model.StatType" />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

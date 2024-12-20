@@ -1,61 +1,73 @@
 @page
 @model Guardadito.Pages.CategoriaPresupuesto.CreateModel
+@{
+    ViewData["Title"] = "Nueva Categoría de Presupuesto";
+    ViewData["Icon"] = "fas fa-money-bill-wave me-2";
+}
 
-        @{
-        ViewData["Title"] = "Create";
-        }
-        
-        <h1>Create</h1>
-        
-    <h4>CategoriaPresupuesto</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CategoriaPresupuesto.CreatedAt" class="control-label"></label>
-                <input asp-for="CategoriaPresupuesto.CreatedAt" class="form-control" />
-                <span asp-validation-for="CategoriaPresupuesto.CreatedAt" class="text-danger"></span>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="@ViewData["Icon"]"></i>
+                        @ViewData["Title"]
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoriaPresupuesto.Nombre" class="form-label">
+                                <i class="fas fa-tag me-1"></i>
+                                Nombre
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="CategoriaPresupuesto.Nombre" class="form-control" />
+                            <span asp-validation-for="CategoriaPresupuesto.Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoriaPresupuesto.MontoAsignado" class="form-label">
+                                <i class="fas fa-dollar-sign me-1"></i>
+                                Monto Asignado
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="CategoriaPresupuesto.MontoAsignado" class="form-control" />
+                            <span asp-validation-for="CategoriaPresupuesto.MontoAsignado" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoriaPresupuesto.MontoGastado" class="form-label">
+                                <i class="fas fa-chart-pie me-1"></i>
+                                Monto Gastado
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="CategoriaPresupuesto.MontoGastado" class="form-control" />
+                            <span asp-validation-for="CategoriaPresupuesto.MontoGastado" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-page="Index" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>
+                                Volver al Listado
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i>
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CategoriaPresupuesto.UpdatedAt" class="control-label"></label>
-                <input asp-for="CategoriaPresupuesto.UpdatedAt" class="form-control" />
-                <span asp-validation-for="CategoriaPresupuesto.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="CategoriaPresupuesto.Nombre" class="control-label"></label>
-                <input asp-for="CategoriaPresupuesto.Nombre" class="form-control" />
-                <span asp-validation-for="CategoriaPresupuesto.Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="CategoriaPresupuesto.MontoAsignado" class="control-label"></label>
-                <input asp-for="CategoriaPresupuesto.MontoAsignado" class="form-control" />
-                <span asp-validation-for="CategoriaPresupuesto.MontoAsignado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="CategoriaPresupuesto.MontoGastado" class="control-label"></label>
-                <input asp-for="CategoriaPresupuesto.MontoGastado" class="form-control" />
-                <span asp-validation-for="CategoriaPresupuesto.MontoGastado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoriaPresupuesto.PresupuestoId" class="control-label"></label>
-                <select asp-for="CategoriaPresupuesto.PresupuestoId" class ="form-control" asp-items="ViewBag.PresupuestoId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

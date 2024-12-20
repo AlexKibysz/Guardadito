@@ -1,44 +1,16 @@
 @page
 @model Guardadito.Pages.Config.TipoCuenta.CreateModel
 
-        @{
-        ViewData["Title"] = "Create";
-        }
-        
-        <h1>Create</h1>
-        
-    <h4>AccountType</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AccountType.Name" class="control-label"></label>
-                <input asp-for="AccountType.Name" class="form-control" />
-                <span asp-validation-for="AccountType.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountType.CreatedAt" class="control-label"></label>
-                <input asp-for="AccountType.CreatedAt" class="form-control" />
-                <span asp-validation-for="AccountType.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountType.UpdatedAt" class="control-label"></label>
-                <input asp-for="AccountType.UpdatedAt" class="form-control" />
-                <span asp-validation-for="AccountType.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+@{
+    ViewData["Title"] = "Nuevo Tipo de Cuenta";
+    ViewData["Icon"] = "fas fa-tags me-2";
+    ViewData["Placeholder"] = "Ingrese el Tipo de Cuenta: ";
+}
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+<partial name="~/Pages/Shared/CRUD/Create/_CreateConfigurationItemPartial.cshtml" model="Model.AccountType" />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

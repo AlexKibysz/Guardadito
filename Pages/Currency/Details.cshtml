@@ -1,67 +1,105 @@
 @page "{id:guid}"
 @model Guardadito.Pages.Currency.Details
-
 @{
-   ViewData["Title"] = "Detalles de Moneda";
+    ViewData["Title"] = "Detalles de Moneda";
 }
 
-<div class="container mt-5">
-    <div class="card shadow-sm">
-        <div class="card-header bg-info text-white">
-            <h3 class="mb-0">
-                <i class="fas fa-info-circle me-2"></i>Detalles de Moneda
-            </h3>
+<div class="container py-5">
+    <div class="card border-0 shadow-lg rounded-3">
+        <div class="card-header border-0 bg-gradient text-white py-3"
+            style="background: linear-gradient(45deg, #0d6efd, #0dcaf0)">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-coins fs-2 me-3"></i>
+                <h3 class="mb-0 fw-bold">Detalles de Moneda</h3>
+            </div>
         </div>
 
         <div class="card-body p-4">
-            <div class="row">
+            <div class="row g-4">
                 <div class="col-md-6">
-                    <h5 class="mb-4">Información General</h5>
-                    <dl class="row">
-                        <dt class="col-sm-4">Código:</dt>
-                        <dd class="col-sm-8">@Model.Currency.Code</dd>
+                    <div class="p-4 bg-light rounded-3 h-100 shadow-sm hover-lift">
+                        <h5 class="border-bottom border-primary pb-2 mb-4">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>Información General
+                        </h5>
+                        <dl class="row g-3">
+                            <dt class="col-sm-4 text-muted">Código:</dt>
+                            <dd class="col-sm-8 fw-bold">@Model.Currency.Code</dd>
 
-                        <dt class="col-sm-4">Nombre:</dt>
-                        <dd class="col-sm-8">@Model.Currency.Name</dd>
+                            <dt class="col-sm-4 text-muted">Nombre:</dt>
+                            <dd class="col-sm-8">@Model.Currency.Name</dd>
 
-                        <dt class="col-sm-4">Símbolo:</dt>
-                        <dd class="col-sm-8">@Model.Currency.Symbol</dd>
+                            <dt class="col-sm-4 text-muted">Símbolo:</dt>
+                            <dd class="col-sm-8 fs-5">@Model.Currency.Symbol</dd>
 
-                        <dt class="col-sm-4">Tipo de Cambio:</dt>
-                        <dd class="col-sm-8">@Model.Currency.ExchangeRate.ToString("N6")</dd>
+                            <dt class="col-sm-4 text-muted">Tipo de Cambio:</dt>
+                            <dd class="col-sm-8 fw-bold text-primary">@Model.Currency.ExchangeRate.ToString("N6")</dd>
 
-                        <dt class="col-sm-4">Fecha de Tasa:</dt>
-                        <dd class="col-sm-8">@Model.Currency.RateDate.ToString("dd/MM/yyyy")</dd>
+                            <dt class="col-sm-4 text-muted">Fecha de Tasa:</dt>
+                            <dd class="col-sm-8">@Model.Currency.RateDate.ToString("dd/MM/yyyy")</dd>
 
-                        <dt class="col-sm-4">Estado:</dt>
-                        <dd class="col-sm-8">
-                            <span class="badge bg-@(Model.Currency.IsActive ? "success" : "danger")">
-                                @(Model.Currency.IsActive ? "Activo" : "Inactivo")
-                            </span>
-                        </dd>
-                    </dl>
+                            <dt class="col-sm-4 text-muted">Estado:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge rounded-pill bg-@(Model.Currency.IsActive ? "success" : "danger")"
+                                    data-bs-toggle="tooltip"
+                                    title="@(Model.Currency.IsActive ? "Moneda activa" : "Moneda inactiva")">
+                                    <i class="fas fa-@(Model.Currency.IsActive ? "check" : "times") me-1"></i>
+                                    @(Model.Currency.IsActive ? "Activo" : "Inactivo")
+                                </span>
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
-                    <h5 class="mb-4">Información de Auditoría</h5>
-                    <dl class="row">
-                        <dt class="col-sm-4">Creado:</dt>
-                        <dd class="col-sm-8">@Model.Currency.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")</dd>
+                    <div class="p-4 bg-light rounded-3 h-100 shadow-sm hover-lift">
+                        <h5 class="border-bottom border-primary pb-2 mb-4">
+                            <i class="fas fa-history me-2 text-primary"></i>Información de Auditoría
+                        </h5>
+                        <dl class="row g-3">
+                            <dt class="col-sm-4 text-muted">Creado:</dt>
+                            <dd class="col-sm-8">
+                                <i class="far fa-calendar-alt me-2 text-primary"></i>
+                                @Model.Currency.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")
+                            </dd>
 
-                        <dt class="col-sm-4">Actualizado:</dt>
-                        <dd class="col-sm-8">@Model.Currency.UpdatedAt.ToString("dd/MM/yyyy HH:mm:ss")</dd>
-                    </dl>
+                            <dt class="col-sm-4 text-muted">Actualizado:</dt>
+                            <dd class="col-sm-8">
+                                <i class="far fa-clock me-2 text-primary"></i>
+                                @Model.Currency.UpdatedAt.ToString("dd/MM/yyyy HH:mm:ss")
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end gap-2 mt-4">
-                <a href="/Currency" class="btn btn-secondary">
+            <div class="d-flex justify-content-end gap-3 mt-4">
+                <a href="/Currency" class="btn btn-outline-secondary btn-lg">
                     <i class="fas fa-arrow-left me-2"></i>Volver
                 </a>
-                <a href="/Currency/Edit/@Model.Currency.Id" class="btn btn-primary">
+                <a href="/Currency/Edit/@Model.Currency.Id" class="btn btn-primary btn-lg" data-bs-toggle="tooltip"
+                    title="Modificar información de la moneda">
                     <i class="fas fa-edit me-2"></i>Editar
                 </a>
             </div>
         </div>
     </div>
-</div> 
+</div>
+
+<style>
+    .hover-lift {
+        transition: transform 0.2s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-5px);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
