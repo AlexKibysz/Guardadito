@@ -1,0 +1,10 @@
+@page
+@model Guardadito.Pages.Config.TipoEstado.DeleteModel
+@{
+    ViewData["Title"] = "Tipo Estadistica";
+    ViewData["Icon"] = "fas fa-flag me-2";
+}
+<partial name="~/Pages/Shared/CRUD/Delete/_DeleteConfigurationItemPartial.cshtml" model="Model.StatType" />
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

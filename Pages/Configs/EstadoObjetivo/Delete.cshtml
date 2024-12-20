@@ -1,40 +1,10 @@
 @page
 @model Guardadito.Pages.Config.EstadoObjetivo.DeleteModel
-
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Estado de Objetivo";
+    ViewData["Icon"] = "fas fa-flag me-2";
 }
-
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>GoalStatus</h4>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GoalStatus.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GoalStatus.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GoalStatus.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GoalStatus.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GoalStatus.UpdatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GoalStatus.UpdatedAt)
-        </dd>
-    </dl>
-
-    <form method="post">
-        <input type="hidden" asp-for="GoalStatus.Id"/>
-        <input type="submit" value="Delete" class="btn btn-danger"/> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
-</div>
+<partial name="~/Pages/Shared/CRUD/Delete/_DeleteConfigurationItemPartial.cshtml" model="Model.GoalStatus" />
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
