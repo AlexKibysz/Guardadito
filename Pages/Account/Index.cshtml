@@ -1,5 +1,5 @@
 @page
-@model Guardadito.Pages.Account.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,45 +12,46 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].SaldoActual)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].SaldoDisponible)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].LimiteCredito)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].FechaCorte)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].FechaPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].FechaApertura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].MonedaPrincipal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cuenta[0].Usuario)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].UpdatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].SaldoActual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].SaldoDisponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].LimiteCredito)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].FechaCorte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].FechaPago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].FechaApertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].MonedaPrincipal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta[0].Usuario)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Cuenta) {
+    @foreach (var item in Model.Cuenta)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
@@ -91,6 +92,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

@@ -1,62 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Guardadito.Data;
+using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Guardadito.Data;
-using Guardadito.Entity;
 
-namespace Guardadito.Pages.Config.RolUsuario
+namespace Guardadito.Pages.Config.RolUsuario;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly Guardadito.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(Guardadito.Data.ApplicationDbContext context)
+    [BindProperty] public UserRole UserRole { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var userrole = await _context.UserRole.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (userrole is not null)
         {
-            _context = context;
+            UserRole = userrole;
+
+            return Page();
         }
 
-        [BindProperty]
-        public UserRole UserRole { get; set; } = default!;
+        return NotFound();
+    }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+    public async Task<IActionResult> OnPostAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var userrole = await _context.UserRole.FindAsync(id);
+        if (userrole != null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var userrole = await _context.UserRole.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (userrole is not null)
-            {
-                UserRole = userrole;
-
-                return Page();
-            }
-
-            return NotFound();
+            UserRole = userrole;
+            _context.UserRole.Remove(UserRole);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var userrole = await _context.UserRole.FindAsync(id);
-            if (userrole != null)
-            {
-                UserRole = userrole;
-                _context.UserRole.Remove(UserRole);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

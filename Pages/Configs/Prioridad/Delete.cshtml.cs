@@ -1,62 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Guardadito.Data;
+using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Guardadito.Data;
-using Guardadito.Entity;
 
-namespace Guardadito.Pages.Config.Prioridad
+namespace Guardadito.Pages.Config.Prioridad;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly Guardadito.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(Guardadito.Data.ApplicationDbContext context)
+    [BindProperty] public Priority Priority { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var priority = await _context.Priority.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (priority is not null)
         {
-            _context = context;
+            Priority = priority;
+
+            return Page();
         }
 
-        [BindProperty]
-        public Priority Priority { get; set; } = default!;
+        return NotFound();
+    }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+    public async Task<IActionResult> OnPostAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var priority = await _context.Priority.FindAsync(id);
+        if (priority != null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var priority = await _context.Priority.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (priority is not null)
-            {
-                Priority = priority;
-
-                return Page();
-            }
-
-            return NotFound();
+            Priority = priority;
+            _context.Priority.Remove(Priority);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var priority = await _context.Priority.FindAsync(id);
-            if (priority != null)
-            {
-                Priority = priority;
-                _context.Priority.Remove(Priority);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

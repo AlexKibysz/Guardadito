@@ -1,62 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Guardadito.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Guardadito.Data;
-using Guardadito.Entity;
 
-namespace Guardadito.Pages.Usuario
+namespace Guardadito.Pages.Usuario;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly Guardadito.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(Guardadito.Data.ApplicationDbContext context)
+    [BindProperty] public Entity.Usuario Usuario { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (usuario is not null)
         {
-            _context = context;
+            Usuario = usuario;
+
+            return Page();
         }
 
-        [BindProperty]
-        public Entity.Usuario Usuario { get; set; } = default!;
+        return NotFound();
+    }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+    public async Task<IActionResult> OnPostAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var usuario = await _context.Usuarios.FindAsync(id);
+        if (usuario != null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (usuario is not null)
-            {
-                Usuario = usuario;
-
-                return Page();
-            }
-
-            return NotFound();
+            Usuario = usuario;
+            _context.Usuarios.Remove(Usuario);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario != null)
-            {
-                Usuario = usuario;
-                _context.Usuarios.Remove(Usuario);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

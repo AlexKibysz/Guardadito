@@ -1,9 +1,8 @@
+using System.ComponentModel.DataAnnotations;
 using Guardadito.Data;
-using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace Guardadito.Pages.Currency;
 
@@ -20,14 +19,11 @@ public class Index : PageModel
 
     public PaginatedList<Entity.Currency> Currencies { get; set; }
 
-    [BindProperty(SupportsGet = true)]
-    public string SearchTerm { get; set; }
+    [BindProperty(SupportsGet = true)] public string SearchTerm { get; set; }
 
-    [BindProperty(SupportsGet = true)]
-    public string SortOrder { get; set; }
+    [BindProperty(SupportsGet = true)] public string SortOrder { get; set; }
 
-    [BindProperty(SupportsGet = true)]
-    public bool? IsActive { get; set; }
+    [BindProperty(SupportsGet = true)] public bool? IsActive { get; set; }
 
     [BindProperty(SupportsGet = true)]
     [Range(1, 100)]
@@ -67,10 +63,7 @@ public class Index : PageModel
                     c.Symbol.ToLower().Contains(searchTermLower));
             }
 
-            if (IsActive.HasValue)
-            {
-                currencyQuery = currencyQuery.Where(c => c.IsActive == IsActive.Value);
-            }
+            if (IsActive.HasValue) currencyQuery = currencyQuery.Where(c => c.IsActive == IsActive.Value);
 
             // Aplicar ordenamiento
             currencyQuery = SortOrder switch
@@ -108,10 +101,6 @@ public class Index : PageModel
 // Clase auxiliar para paginación simplificada
 public class PaginatedList<T> : List<T>
 {
-    public int PageIndex { get; }
-    public int TotalPages { get; }
-    public int TotalItems { get; }
-
     public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
     {
         PageIndex = pageIndex;
@@ -119,6 +108,10 @@ public class PaginatedList<T> : List<T>
         TotalPages = (int)Math.Ceiling(count / (double)pageSize);
         AddRange(items);
     }
+
+    public int PageIndex { get; }
+    public int TotalPages { get; }
+    public int TotalItems { get; }
 
     public bool HasPreviousPage => PageIndex > 1;
     public bool HasNextPage => PageIndex < TotalPages;

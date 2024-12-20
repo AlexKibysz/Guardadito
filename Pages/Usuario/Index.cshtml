@@ -1,5 +1,5 @@
 @page
-@model Guardadito.Pages.Usuario.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,30 +12,31 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario[0].CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario[0].UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario[0].Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario[0].PasswordHash)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario[0].Rol)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario[0].CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario[0].UpdatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario[0].Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario[0].PasswordHash)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario[0].Rol)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Usuario) {
+    @foreach (var item in Model.Usuario)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
@@ -61,6 +62,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

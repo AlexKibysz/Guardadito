@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Guardadito.Entity;
 
 namespace Guardadito.Entity;
 

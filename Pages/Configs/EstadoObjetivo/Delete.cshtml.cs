@@ -1,62 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Guardadito.Data;
+using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Guardadito.Data;
-using Guardadito.Entity;
 
-namespace Guardadito.Pages.Config.EstadoObjetivo
+namespace Guardadito.Pages.Config.EstadoObjetivo;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly Guardadito.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(Guardadito.Data.ApplicationDbContext context)
+    [BindProperty] public GoalStatus GoalStatus { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var goalstatus = await _context.GoalStatus.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (goalstatus is not null)
         {
-            _context = context;
+            GoalStatus = goalstatus;
+
+            return Page();
         }
 
-        [BindProperty]
-        public GoalStatus GoalStatus { get; set; } = default!;
+        return NotFound();
+    }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+    public async Task<IActionResult> OnPostAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var goalstatus = await _context.GoalStatus.FindAsync(id);
+        if (goalstatus != null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var goalstatus = await _context.GoalStatus.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (goalstatus is not null)
-            {
-                GoalStatus = goalstatus;
-
-                return Page();
-            }
-
-            return NotFound();
+            GoalStatus = goalstatus;
+            _context.GoalStatus.Remove(GoalStatus);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var goalstatus = await _context.GoalStatus.FindAsync(id);
-            if (goalstatus != null)
-            {
-                GoalStatus = goalstatus;
-                _context.GoalStatus.Remove(GoalStatus);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

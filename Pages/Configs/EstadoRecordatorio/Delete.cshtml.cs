@@ -1,62 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Guardadito.Data;
+using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Guardadito.Data;
-using Guardadito.Entity;
 
-namespace Guardadito.Pages.Config.EstadoRecordatorio
+namespace Guardadito.Pages.Config.EstadoRecordatorio;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly Guardadito.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(Guardadito.Data.ApplicationDbContext context)
+    [BindProperty] public ReminderStatus ReminderStatus { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var reminderstatus = await _context.ReminderStatus.FirstOrDefaultAsync(m => m.Id == id);
+
+        if (reminderstatus is not null)
         {
-            _context = context;
+            ReminderStatus = reminderstatus;
+
+            return Page();
         }
 
-        [BindProperty]
-        public ReminderStatus ReminderStatus { get; set; } = default!;
+        return NotFound();
+    }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+    public async Task<IActionResult> OnPostAsync(Guid? id)
+    {
+        if (id == null) return NotFound();
+
+        var reminderstatus = await _context.ReminderStatus.FindAsync(id);
+        if (reminderstatus != null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var reminderstatus = await _context.ReminderStatus.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (reminderstatus is not null)
-            {
-                ReminderStatus = reminderstatus;
-
-                return Page();
-            }
-
-            return NotFound();
+            ReminderStatus = reminderstatus;
+            _context.ReminderStatus.Remove(ReminderStatus);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var reminderstatus = await _context.ReminderStatus.FindAsync(id);
-            if (reminderstatus != null)
-            {
-                ReminderStatus = reminderstatus;
-                _context.ReminderStatus.Remove(ReminderStatus);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

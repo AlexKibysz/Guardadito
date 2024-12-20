@@ -1,5 +1,5 @@
 @page "{id:guid}"
-@model Guardadito.Pages.Currency.Details
+@model Details
 @{
     ViewData["Title"] = "Detalles de Moneda";
 }
@@ -7,7 +7,7 @@
 <div class="container py-5">
     <div class="card border-0 shadow-lg rounded-3">
         <div class="card-header border-0 bg-gradient text-white py-3"
-            style="background: linear-gradient(45deg, #0d6efd, #0dcaf0)">
+             style="background: linear-gradient(45deg, #0d6efd, #0dcaf0)">
             <div class="d-flex align-items-center">
                 <i class="fas fa-coins fs-2 me-3"></i>
                 <h3 class="mb-0 fw-bold">Detalles de Moneda</h3>
@@ -40,8 +40,8 @@
                             <dt class="col-sm-4 text-muted">Estado:</dt>
                             <dd class="col-sm-8">
                                 <span class="badge rounded-pill bg-@(Model.Currency.IsActive ? "success" : "danger")"
-                                    data-bs-toggle="tooltip"
-                                    title="@(Model.Currency.IsActive ? "Moneda activa" : "Moneda inactiva")">
+                                      data-bs-toggle="tooltip"
+                                      title="@(Model.Currency.IsActive ? "Moneda activa" : "Moneda inactiva")">
                                     <i class="fas fa-@(Model.Currency.IsActive ? "check" : "times") me-1"></i>
                                     @(Model.Currency.IsActive ? "Activo" : "Inactivo")
                                 </span>
@@ -77,7 +77,7 @@
                     <i class="fas fa-arrow-left me-2"></i>Volver
                 </a>
                 <a href="/Currency/Edit/@Model.Currency.Id" class="btn btn-primary btn-lg" data-bs-toggle="tooltip"
-                    title="Modificar información de la moneda">
+                   title="Modificar información de la moneda">
                     <i class="fas fa-edit me-2"></i>Editar
                 </a>
             </div>

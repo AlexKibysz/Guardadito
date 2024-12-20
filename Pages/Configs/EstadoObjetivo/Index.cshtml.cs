@@ -1,29 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Guardadito.Data;
 using Guardadito.Entity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
-namespace Guardadito.Pages.Config.EstadoObjetivo
+namespace Guardadito.Pages.Config.EstadoObjetivo;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public IndexModel(ApplicationDbContext context)
     {
-        private readonly Guardadito.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(Guardadito.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public IList<GoalStatus> GoalStatus { get; set; } = default!;
 
-        public IList<GoalStatus> GoalStatus { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            GoalStatus = await _context.GoalStatus.ToListAsync();
-        }
+    public async Task OnGetAsync()
+    {
+        GoalStatus = await _context.GoalStatus.ToListAsync();
     }
 }

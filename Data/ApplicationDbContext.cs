@@ -1,13 +1,14 @@
 using Guardadito.Entity;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Guardadito.Data;
 
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Currency> Currencies { get; set; }
     public DbSet<Cuenta> Cuentas { get; set; }
@@ -20,6 +21,26 @@ public class ApplicationDbContext : DbContext
     public DbSet<Presupuesto> Presupuestos { get; set; }
     public DbSet<CategoriaPresupuesto> CategoriasPresupuesto { get; set; }
     public DbSet<EstadisticaDetalle> EstadisticasDetalle { get; set; }
+
+    public DbSet<AccountType> AccountType { get; set; } = default!;
+
+    public DbSet<CategoryType> CategoryType { get; set; } = default!;
+
+    public DbSet<GoalStatus> GoalStatus { get; set; } = default!;
+
+    public DbSet<Priority> Priority { get; set; } = default!;
+
+    public DbSet<ReminderStatus> ReminderStatus { get; set; } = default!;
+
+    public DbSet<ReminderType> ReminderType { get; set; } = default!;
+
+    public DbSet<StatType> StatType { get; set; } = default!;
+
+    public DbSet<TransactionCategory> TransactionCategory { get; set; } = default!;
+
+    public DbSet<TransactionType> TransactionType { get; set; } = default!;
+
+    public DbSet<UserRole> UserRole { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -102,10 +123,10 @@ public class ApplicationDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<ConfiguracionUsuario>()
-    .HasOne(cu => cu.MonedaPrincipal)
-    .WithMany(m => m.ConfiguracionesUsuario)
-    .HasForeignKey(cu => cu.MonedaPrincipalId)
-    .OnDelete(DeleteBehavior.Restrict);
+            .HasOne(cu => cu.MonedaPrincipal)
+            .WithMany(m => m.ConfiguracionesUsuario)
+            .HasForeignKey(cu => cu.MonedaPrincipalId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         // Configuración Estadística
         modelBuilder.Entity<Estadistica>()
@@ -178,24 +199,4 @@ public class ApplicationDbContext : DbContext
             entity.SetAuditDates(entry.State == EntityState.Added);
         }
     }
-
-public DbSet<Guardadito.Entity.AccountType> AccountType { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.CategoryType> CategoryType { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.GoalStatus> GoalStatus { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.Priority> Priority { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.ReminderStatus> ReminderStatus { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.ReminderType> ReminderType { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.StatType> StatType { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.TransactionCategory> TransactionCategory { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.TransactionType> TransactionType { get; set; } = default!;
-
-public DbSet<Guardadito.Entity.UserRole> UserRole { get; set; } = default!;
 }

@@ -1,30 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Guardadito.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Guardadito.Data;
-using Guardadito.Entity;
 
-namespace Guardadito.Pages.CategoriaPresupuesto
+namespace Guardadito.Pages.CategoriaPresupuesto;
+
+public class IndexModel : PageModel
 {
-   public class IndexModel : PageModel
-   {
-      private readonly Guardadito.Data.ApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-      public IndexModel(Guardadito.Data.ApplicationDbContext context)
-      {
-         _context = context;
-      }
+    public IndexModel(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
-      public IList<Entity.CategoriaPresupuesto> CategoriaPresupuesto { get; set; } = default!;
+    public IList<Entity.CategoriaPresupuesto> CategoriaPresupuesto { get; set; } = default!;
 
-      public async Task OnGetAsync()
-      {
-         CategoriaPresupuesto = await _context.CategoriasPresupuesto
-             .Include(c => c.Presupuesto).ToListAsync();
-      }
-   }
+    public async Task OnGetAsync()
+    {
+        CategoriaPresupuesto = await _context.CategoriasPresupuesto
+            .Include(c => c.Presupuesto).ToListAsync();
+    }
 }

@@ -1,5 +1,5 @@
 @page "{id:guid}"
-@model Guardadito.Pages.Currency.Delete
+@model Delete
 
 @{
     ViewData["Title"] = "Eliminar Moneda";
@@ -46,7 +46,7 @@
             </div>
 
             <form method="post">
-                <input type="hidden" asp-for="Currency.Id" />
+                <input type="hidden" asp-for="Currency.Id"/>
                 <div class="d-flex justify-content-end gap-2">
                     <a href="/Currency" class="btn btn-secondary">
                         <i class="fas fa-times me-2"></i>Cancelar

@@ -1,5 +1,5 @@
 @page
-@model Guardadito.Pages.Categoria.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,36 +12,37 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].TipoCategoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].Icono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].Presupuesto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].CategoriaPadre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria[0].UpdatedAt)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].TipoCategoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].Icono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].Presupuesto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].CategoriaPadre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria[0].UpdatedAt)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Categoria) {
+    @foreach (var item in Model.Categoria)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -73,6 +74,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

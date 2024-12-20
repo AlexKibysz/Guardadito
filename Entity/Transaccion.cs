@@ -17,8 +17,7 @@ public class Transaccion : BaseEntity
     [Required(ErrorMessage = "La moneda original es obligatoria")]
     public Guid MonedaOriginalId { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")]
-    public decimal? MontoConvertido { get; set; }
+    [Column(TypeName = "decimal(18,2)")] public decimal? MontoConvertido { get; set; }
 
     public Guid? MonedaDestinoId { get; set; }
 
@@ -34,8 +33,7 @@ public class Transaccion : BaseEntity
 
     public bool Recurrente { get; set; }
 
-    [StringLength(500)]
-    public string Descripcion { get; set; }
+    [StringLength(500)] public string Descripcion { get; set; }
 
     // Relaciones
     public Currency MonedaOriginal { get; set; }

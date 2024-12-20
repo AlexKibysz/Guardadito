@@ -1,101 +1,93 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using Guardadito.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Guardadito.Pages.Currency;
 
 public class Edit : PageModel
 {
-   private readonly ApplicationDbContext _context;
-   private readonly ILogger<Edit> _logger;
+    private readonly ApplicationDbContext _context;
+    private readonly ILogger<Edit> _logger;
 
-   public Edit(ApplicationDbContext context, ILogger<Edit> logger)
-   {
-      _context = context;
-      _logger = logger;
-   }
+    public Edit(ApplicationDbContext context, ILogger<Edit> logger)
+    {
+        _context = context;
+        _logger = logger;
+    }
 
-   [BindProperty]
-   public CurrencyEditModel CurrencyModel { get; set; }
+    [BindProperty] public CurrencyEditModel CurrencyModel { get; set; }
 
-   public class CurrencyEditModel
-   {
-      public Guid Id { get; set; }
+    public async Task<IActionResult> OnGetAsync(Guid id)
+    {
+        var currency = await _context.Currencies.FindAsync(id);
 
-      [Required(ErrorMessage = "El código es obligatorio")]
-      public string Code { get; set; }
+        if (currency == null) return NotFound();
 
-      [Required(ErrorMessage = "El nombre es obligatorio")]
-      public string Name { get; set; }
+        CurrencyModel = new CurrencyEditModel
+        {
+            Id = currency.Id,
+            Code = currency.Code,
+            Name = currency.Name,
+            Symbol = currency.Symbol,
+            ExchangeRate = currency.ExchangeRate,
+            RateDate = currency.RateDate,
+            IsActive = currency.IsActive
+        };
 
-      [Required(ErrorMessage = "El símbolo es obligatorio")]
-      public string Symbol { get; set; }
+        return Page();
+    }
 
-      [Required(ErrorMessage = "El tipo de cambio es obligatorio")]
-      public decimal ExchangeRate { get; set; }
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+            return Page();
 
-      [Required(ErrorMessage = "La fecha es obligatoria")]
-      public DateOnly RateDate { get; set; }
+        try
+        {
+            var currency = await _context.Currencies.FindAsync(CurrencyModel.Id);
 
-      public bool IsActive { get; set; }
-   }
+            if (currency == null) return NotFound();
 
-   public async Task<IActionResult> OnGetAsync(Guid id)
-   {
-      var currency = await _context.Currencies.FindAsync(id);
+            currency.Code = CurrencyModel.Code.ToUpper();
+            currency.Name = CurrencyModel.Name;
+            currency.Symbol = CurrencyModel.Symbol;
+            currency.ExchangeRate = CurrencyModel.ExchangeRate;
+            currency.RateDate = CurrencyModel.RateDate;
+            currency.IsActive = CurrencyModel.IsActive;
 
-      if (currency == null)
-      {
-         return NotFound();
-      }
+            currency.SetAuditDates(false);
 
-      CurrencyModel = new CurrencyEditModel
-      {
-         Id = currency.Id,
-         Code = currency.Code,
-         Name = currency.Name,
-         Symbol = currency.Symbol,
-         ExchangeRate = currency.ExchangeRate,
-         RateDate = currency.RateDate,
-         IsActive = currency.IsActive
-      };
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al actualizar la moneda");
+            ModelState.AddModelError(string.Empty, "Ha ocurrido un error al actualizar la moneda.");
+            return Page();
+        }
+    }
 
-      return Page();
-   }
+    public class CurrencyEditModel
+    {
+        public Guid Id { get; set; }
 
-   public async Task<IActionResult> OnPostAsync()
-   {
-      if (!ModelState.IsValid)
-         return Page();
+        [Required(ErrorMessage = "El código es obligatorio")]
+        public string Code { get; set; }
 
-      try
-      {
-         var currency = await _context.Currencies.FindAsync(CurrencyModel.Id);
+        [Required(ErrorMessage = "El nombre es obligatorio")]
+        public string Name { get; set; }
 
-         if (currency == null)
-         {
-            return NotFound();
-         }
+        [Required(ErrorMessage = "El símbolo es obligatorio")]
+        public string Symbol { get; set; }
 
-         currency.Code = CurrencyModel.Code.ToUpper();
-         currency.Name = CurrencyModel.Name;
-         currency.Symbol = CurrencyModel.Symbol;
-         currency.ExchangeRate = CurrencyModel.ExchangeRate;
-         currency.RateDate = CurrencyModel.RateDate;
-         currency.IsActive = CurrencyModel.IsActive;
+        [Required(ErrorMessage = "El tipo de cambio es obligatorio")]
+        public decimal ExchangeRate { get; set; }
 
-         currency.SetAuditDates(isNew: false);
+        [Required(ErrorMessage = "La fecha es obligatoria")]
+        public DateOnly RateDate { get; set; }
 
-         await _context.SaveChangesAsync();
-         return RedirectToPage("./Index");
-      }
-      catch (Exception ex)
-      {
-         _logger.LogError(ex, "Error al actualizar la moneda");
-         ModelState.AddModelError(string.Empty, "Ha ocurrido un error al actualizar la moneda.");
-         return Page();
-      }
-   }
+        public bool IsActive { get; set; }
+    }
 }

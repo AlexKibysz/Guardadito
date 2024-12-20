@@ -1,5 +1,5 @@
 @page
-@model Guardadito.Pages.Index
+@model Index
 @{
     ViewData["Title"] = "Inicio";
 }
@@ -59,25 +59,25 @@
             <!-- Columna izquierda para la tabla -->
             <div class="col-12 col-md-6 mb-4">
                 <div class="table-container"
-                    style="border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto;">
+                     style="border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto;">
                     <table id="personasTable" class="table table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Edad</th>
-                                <th>Ciudad</th>
-                            </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Ciudad</th>
+                        </tr>
                         </thead>
                         <tbody>
 
-                            @foreach (var persona in Model.Personas)
-                            {
-                                <tr>
-                                    <td>@persona.Nombre</td>
-                                    <td>@persona.Edad</td>
-                                    <td>@persona.Ciudad</td>
-                                </tr>
-                            }
+                        @foreach (var persona in Model.Personas)
+                        {
+                            <tr>
+                                <td>@persona.Nombre</td>
+                                <td>@persona.Edad</td>
+                                <td>@persona.Ciudad</td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>
@@ -95,7 +95,7 @@
                 <div class="dropdown-container">
                     <div class="btn-group w-100">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                                aria-expanded="false">
                             Selecciona un Gráfico
                         </button>
                         <ul class="dropdown-menu w-100">
