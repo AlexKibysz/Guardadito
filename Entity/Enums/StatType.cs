@@ -1,9 +1,12 @@
-namespace Guardadito.Entity.Enums;
-
-public enum StatType
+namespace Guardadito.Entity;
+public class StatType : BaseEntity
 {
+   public string Name { get; set; }
+
+   /*
     BalanceMensual,
     GastosPorCategoria,
     TendenciaAhorro,
     ProyeccionGastos
-} 
+    */
+}

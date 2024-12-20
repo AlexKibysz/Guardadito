@@ -1,4 +1,4 @@
-using Guardadito.Entity.Prueba;
+using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;

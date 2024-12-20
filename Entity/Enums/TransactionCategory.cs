@@ -1,12 +1,15 @@
-namespace Guardadito.Entity.Enums;
+namespace Guardadito.Entity;
 
-public enum TransactionCategory
+public class TransactionCategory : BaseEntity
 {
+   public string Name { get; set; }
+
+   /*
     Alimentacion,
     Transporte,
     Vivienda,
     Entretenimiento,
     Servicios,
     Educacion,
-    Salud
-} 
+    Salud*/
+}

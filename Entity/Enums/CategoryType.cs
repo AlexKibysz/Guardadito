@@ -1,9 +1,5 @@
-namespace Guardadito.Entity.Enums;
-
-public enum CategoryType
+namespace Guardadito.Entity;
+public class CategoryType : BaseEntity
 {
-    Ingreso,
-    Gasto,
-    Ahorro,
-    Inversion
-} 
+   public string Name { get; set; }
+}

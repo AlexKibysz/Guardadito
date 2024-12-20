@@ -1,0 +1,94 @@
+@page
+@model Guardadito.Pages.Account.CreateModel
+
+@{
+    ViewData["Title"] = "Crear Cuenta";
+}
+
+<h1>Create</h1>
+
+<h4>Cuenta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cuenta.CreatedAt" class="control-label"></label>
+                <input asp-for="Cuenta.CreatedAt" class="form-control" />
+                <span asp-validation-for="Cuenta.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuenta.UpdatedAt" class="control-label"></label>
+                <input asp-for="Cuenta.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Cuenta.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cuenta.Nombre" class="control-label"></label>
+                <input asp-for="Cuenta.Nombre" class="form-control" />
+                <span asp-validation-for="Cuenta.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cuenta.SaldoActual" class="control-label"></label>
+                <input asp-for="Cuenta.SaldoActual" class="form-control" />
+                <span asp-validation-for="Cuenta.SaldoActual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cuenta.SaldoDisponible" class="control-label"></label>
+                <input asp-for="Cuenta.SaldoDisponible" class="form-control" />
+                <span asp-validation-for="Cuenta.SaldoDisponible" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cuenta.MonedaPrincipalId" class="control-label"></label>
+                <select asp-for="Cuenta.MonedaPrincipalId" class="form-control"
+                    asp-items="ViewBag.MonedaPrincipalId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuenta.LimiteCredito" class="control-label"></label>
+                <input asp-for="Cuenta.LimiteCredito" class="form-control" />
+                <span asp-validation-for="Cuenta.LimiteCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuenta.FechaCorte" class="control-label"></label>
+                <input asp-for="Cuenta.FechaCorte" class="form-control" />
+                <span asp-validation-for="Cuenta.FechaCorte" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuenta.FechaPago" class="control-label"></label>
+                <input asp-for="Cuenta.FechaPago" class="form-control" />
+                <span asp-validation-for="Cuenta.FechaPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Cuenta.FechaApertura" class="control-label"></label>
+                <input asp-for="Cuenta.FechaApertura" class="form-control" />
+                <span asp-validation-for="Cuenta.FechaApertura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuenta.UsuarioId" class="control-label"></label>
+                <select asp-for="Cuenta.UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cuenta.TipoCuenta" class="control-label"></label>
+                <select asp-for="Cuenta.TipoCuenta" class="form-control" asp-items="ViewBag.TipoCuenta"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

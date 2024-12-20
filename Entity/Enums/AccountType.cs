@@ -1,9 +1,6 @@
-namespace Guardadito.Entity.Enums;
+namespace Guardadito.Entity;
 
-public enum AccountType
+public class AccountType : BaseEntity
 {
-    Efectivo,
-    CuentaBancaria,
-    TarjetaCredito,
-    Inversion
-} 
+   public string Name { get; set; }
+}

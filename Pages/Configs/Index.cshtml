@@ -1,0 +1,137 @@
+@page
+@model Guardadito.Pages.Config.Index
+@{
+    ViewData["Title"] = "Configs";
+}
+
+
+@section Styles {
+    <style>
+        .card {
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+}
+
+<div class="container py-4">
+    <h1 class="display-4 mb-4">Configuración</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Cards de configuración -->
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Categorías de Presupuesto</h5>
+                    <p class="card-text">Administra las categorías para los presupuestos.</p>
+                    <a href="/Configs/CategoriaPresupuesto" class="btn btn-primary mt-auto">Ir a Categorías de
+                        Presupuesto</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Categorías de Transacción</h5>
+                    <p class="card-text">Gestiona las categorías para las transacciones.</p>
+                    <a href="/Configs/CategoriaTransaccion" class="btn btn-primary">Ir a Categorías de Transacción</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Estados de Objetivo</h5>
+                    <p class="card-text">Configura los diferentes estados de los objetivos.</p>
+                    <a href="/Configs/EstadoObjetivo" class="btn btn-primary">Ir a Estados de Objetivo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Estados de Recordatorio</h5>
+                    <p class="card-text">Define los estados para los recordatorios.</p>
+                    <a href="/Configs/EstadoRecordatorio" class="btn btn-primary">Ir a Estados de Recordatorio</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Prioridades</h5>
+                    <p class="card-text">Establece los niveles de prioridad.</p>
+                    <a href="/Configs/Prioridad" class="btn btn-primary">Ir a Prioridades</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Roles de Usuario</h5>
+                    <p class="card-text">Administra los diferentes roles de usuario.</p>
+                    <a href="/Configs/RolUsuario" class="btn btn-primary">Ir a Roles de Usuario</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Tipos de Categoría</h5>
+                    <p class="card-text">Gestiona los tipos de categorías.</p>
+                    <a href="/Configs/TipoCategoria" class="btn btn-primary">Ir a Tipos de Categoría</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Tipos de Cuenta</h5>
+                    <p class="card-text">Configura los diferentes tipos de cuentas.</p>
+                    <a href="/Configs/TipoCuenta" class="btn btn-primary">Ir a Tipos de Cuenta</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Tipos de Estado</h5>
+                    <p class="card-text">Define los tipos de estados del sistema.</p>
+                    <a href="/Configs/TipoEstado" class="btn btn-primary">Ir a Tipos de Estado</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Tipos de Recordatorio</h5>
+                    <p class="card-text">Administra los diferentes tipos de recordatorios.</p>
+                    <a href="/Configs/TipoRecordatorio" class="btn btn-primary">Ir a Tipos de Recordatorio</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Tipos de Transacción</h5>
+                    <p class="card-text">Gestiona los tipos de transacciones.</p>
+                    <a href="/Configs/TipoTransaccion" class="btn btn-primary">Ir a Tipos de Transacción</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

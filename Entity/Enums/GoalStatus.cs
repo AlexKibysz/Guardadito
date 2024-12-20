@@ -1,8 +1,5 @@
-namespace Guardadito.Entity.Enums;
-
-public enum GoalStatus
+namespace Guardadito.Entity;
+public class GoalStatus : BaseEntity
 {
-    Activo,
-    Completado,
-    Cancelado
-} 
+   public string Name { get; set; }
+}

@@ -178,4 +178,24 @@ public class ApplicationDbContext : DbContext
             entity.SetAuditDates(entry.State == EntityState.Added);
         }
     }
+
+public DbSet<Guardadito.Entity.AccountType> AccountType { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.CategoryType> CategoryType { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.GoalStatus> GoalStatus { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.Priority> Priority { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.ReminderStatus> ReminderStatus { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.ReminderType> ReminderType { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.StatType> StatType { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.TransactionCategory> TransactionCategory { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.TransactionType> TransactionType { get; set; } = default!;
+
+public DbSet<Guardadito.Entity.UserRole> UserRole { get; set; } = default!;
 }

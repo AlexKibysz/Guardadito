@@ -4,9 +4,9 @@ namespace Guardadito.Entity;
 
 public class ConfiguracionUsuario : BaseEntity
 {
-    public Guid Id { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public new Guid Id { get; set; }
+    public new DateTime CreatedAt { get; set; }
+    public new DateTime UpdatedAt { get; set; }
 
     [Required(ErrorMessage = "La moneda principal es obligatoria")]
     public Guid MonedaPrincipalId { get; set; }

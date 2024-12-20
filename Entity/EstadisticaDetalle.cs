@@ -5,9 +5,9 @@ namespace Guardadito.Entity;
 
 public class EstadisticaDetalle : BaseEntity
 {
-   public Guid Id { get; set; }
-   public DateTime CreatedAt { get; set; }
-   public DateTime UpdatedAt { get; set; }
+   public new Guid Id { get; set; }
+   public new DateTime CreatedAt { get; set; }
+   public new DateTime UpdatedAt { get; set; }
 
    [Required]
    public string Clave { get; set; }

@@ -1,8 +1,9 @@
-namespace Guardadito.Entity.Enums;
-
-public enum TransactionType
+namespace Guardadito.Entity;
+public class TransactionType : BaseEntity
 {
-    Ingreso,
-    Gasto,
-    Transferencia
-} 
+   public string Name { get; set; }
+   /*
+   Ingreso,
+       Gasto,
+       Transferencia*/
+}

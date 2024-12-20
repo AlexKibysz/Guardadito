@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
-using Guardadito.Entity.Enums;
+using Guardadito.Entity;
 
 namespace Guardadito.Entity;
 
 public class Recordatorio : BaseEntity
 {
-    public Guid Id { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public new Guid Id { get; set; }
+    public new DateTime CreatedAt { get; set; }
+    public new DateTime UpdatedAt { get; set; }
 
     [Required(ErrorMessage = "El título es obligatorio")]
     [StringLength(200, ErrorMessage = "El título no puede exceder los 200 caracteres")]

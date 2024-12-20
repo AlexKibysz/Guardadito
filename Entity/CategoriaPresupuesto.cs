@@ -4,9 +4,9 @@ namespace Guardadito.Entity;
 
 public class CategoriaPresupuesto : BaseEntity
 {
-    public Guid Id { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public new Guid Id { get; set; }
+    public new DateTime CreatedAt { get; set; }
+    public new DateTime UpdatedAt { get; set; }
 
     [Required(ErrorMessage = "El nombre es obligatorio")]
     [StringLength(100, ErrorMessage = "El nombre no puede exceder los 100 caracteres")]

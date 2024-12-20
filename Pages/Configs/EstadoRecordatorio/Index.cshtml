@@ -1,0 +1,75 @@
+@page
+@model Guardadito.Pages.Config.EstadoRecordatorio.IndexModel
+@{
+    ViewData["Title"] = "Estados de Recordatorio";
+}
+
+@section Styles {
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex align-items-center mb-4">
+        <a href="/Configs" class="btn btn-outline-secondary me-3">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        <h1 class="h2 mb-0">Estados de Recordatorio</h1>
+        <a asp-page="Create" class="btn btn-primary ms-auto">
+            <i class="bi bi-plus-lg"></i> Nuevo Estado
+        </a>
+    </div>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table id="estadosTable" class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.ReminderStatus[0].Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.ReminderStatus[0].CreatedAt)</th>
+                        <th>@Html.DisplayNameFor(model => model.ReminderStatus[0].UpdatedAt)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ReminderStatus)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#estadosTable').DataTable({
+                language: spanishLenguage,
+                responsive: true,
+                order: [[0, 'asc']],
+                pageLength: 10,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]]
+            });
+        });
+    </script>
+}

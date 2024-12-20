@@ -1,9 +1,5 @@
-namespace Guardadito.Entity.Enums;
-
-public enum Priority
+namespace Guardadito.Entity;
+public class Priority : BaseEntity
 {
-    Baja,
-    Media,
-    Alta,
-    Urgente
-} 
+   public string Name { get; set; }
+}
