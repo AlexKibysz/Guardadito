@@ -66,13 +66,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#estadosTable').DataTable({
-                language: spanishLenguage,
-                responsive: true,
-                order: [[0, 'asc']],
-                pageLength: 10,
-                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]]
-            });
+            $('#estadosTable').DataTable();
         });
     </script>
 }

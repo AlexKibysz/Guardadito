@@ -1,4 +1,4 @@
-var spanishLanguage = {
+var dataTableSpanish = {
     // Textos de longitud de página
     lengthMenu: "Mostrar _MENU_ registros",
 
@@ -40,7 +40,7 @@ var spanishLanguage = {
         }
     },
 
-    // Textos de botones
+    // Textos de botones 
     buttons: {
         copy: "Copiar",
         copyTitle: "Copiado al portapapeles",

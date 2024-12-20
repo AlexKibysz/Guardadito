@@ -5,11 +5,11 @@
 }
 
 @section Styles {
-            <!-- Favicons -->
-            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-            <link rel="manifest" href="/site.webmanifest">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 }
 
 <div class="container-fluid py-4">
@@ -36,24 +36,24 @@
                 <tbody>
                     @foreach (var item in Model.AccountType)
                     {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">
-                                                <i class="bi bi-eye"></i>
-                                            </a>
-                                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -62,17 +62,9 @@
 </div>
 
 @section Scripts {
-            <script>
-                $(document).ready(function () {
-                    $('#tiposCuentaTable').DataTable({
-                        language: {
-                            url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-                        },
-                        responsive: true,
-                        order: [[0, 'asc']],
-                        pageLength: 10,
-                        lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]]
-                    });
-                });
-            </script>
+    <script>
+        $(document).ready(function () {
+            $('#tiposCuentaTable').DataTable();
+        });
+    </script>
 }
