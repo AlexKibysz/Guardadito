@@ -1,0 +1,109 @@
+@model Guardadito.Entity.Contracts.IConfigurationEntity
+@{
+    var entityDisplayName = ViewData["Title"]?.ToString() ?? "Registro";
+    var icon = ViewData["Icon"]?.ToString() ?? "bi bi-pencil-square";
+}
+
+<div class="container-fluid py-4 animate__animated animate__fadeIn">
+    <div class="card border-0 shadow-lg">
+        <div class="card-header bg-gradient position-relative py-4">
+            <div class="position-absolute top-0 start-0 translate-middle-y ms-4 mt-4">
+                <div class="bg-white rounded-circle shadow d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                    <i class="@icon fs-4 text-primary"></i>
+                </div>
+            </div>
+            <h5 class="card-title mb-0 ms-5 ps-4 text-primary">
+                Editar @entityDisplayName
+            </h5>
+        </div>
+        
+        <div class="card-body p-4">
+            <form method="post" id="editForm" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="mb-4 position-relative">
+                    <label asp-for="Name" class="form-label fw-bold">
+                        <i class="bi bi-tag-fill me-2 text-primary"></i>
+                        @Html.DisplayNameFor(m => m.Name)
+                    </label>
+                    <input asp-for="Name" class="form-control form-control-lg border-0 bg-light" 
+                           placeholder="Ingrese el nombre" required />
+                    <div class="invalid-tooltip">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="UpdatedAt" />
+
+                <!-- Información de Auditoría Colapsable -->
+                <div class="mb-4">
+                    <button class="btn btn-link text-decoration-none p-0" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#auditInfo">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Información de Auditoría
+                    </button>
+                    <div class="collapse mt-2" id="auditInfo">
+                        <div class="card bg-light border-0">
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block">Creado el:</small>
+                                        <span class="fw-bold">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block">Última actualización:</small>
+                                        <span class="fw-bold">@Model.UpdatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-3 mt-5">
+                    <a asp-page="./Index" class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Volver
+                    </a>
+                    <button type="submit" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-check2-circle me-2"></i>
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar tooltips
+            const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltips.forEach(tooltip => new bootstrap.Tooltip(tooltip));
+
+            // Validación del formulario
+            const form = document.getElementById('editForm');
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    // Mostrar indicador de carga
+                    Swal.fire({
+                        title: 'Guardando cambios...',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    </script>
+}

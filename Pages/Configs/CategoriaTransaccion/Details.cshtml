@@ -1,37 +1,7 @@
 @page
 @model Guardadito.Pages.Config.CategoriaTransaccion.DetailsModel
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Categoría de Transacción";
+    ViewData["Icon"] = "fas fa-tags me-2";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>TransactionCategory</h4>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TransactionCategory.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TransactionCategory.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TransactionCategory.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TransactionCategory.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TransactionCategory.UpdatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TransactionCategory.UpdatedAt)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.TransactionCategory.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+<partial name="~/Pages/Shared/CRUD/Details/_DetailsConfigurationItemPartial.cshtml" model="Model.TransactionCategory" />

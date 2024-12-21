@@ -1,48 +1,10 @@
 @page
 @model Guardadito.Pages.Config.TipoCuenta.EditModel
 
+
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Tipos de Cuenta";
+    ViewData["Icon"] = "bi bi-tags-fill";
 }
 
-<h1>Edit</h1>
-
-<h4>AccountType</h4>
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-
-                <label asp-for="AccountType.Name" class="control-label"></label>
-                <input asp-for="AccountType.Name" class="form-control"/>
-                <span asp-validation-for="AccountType.Name" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="AccountType.Id"/>
-            <div class="form-group">
-
-                <label asp-for="AccountType.CreatedAt" class="control-label"></label>
-                <input asp-for="AccountType.CreatedAt" class="form-control"/>
-                <span asp-validation-for="AccountType.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-
-                <label asp-for="AccountType.UpdatedAt" class="control-label"></label>
-                <input asp-for="AccountType.UpdatedAt" class="form-control"/>
-                <span asp-validation-for="AccountType.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+<partial name="~/Pages/Shared/CRUD/Edit/_EditConfigurationItemPartial.cshtml" model="Model.AccountType" />
