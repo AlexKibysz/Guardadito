@@ -1,0 +1,55 @@
+@page
+@model Guardadito.Pages.Usuario.Configuration.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ConfiguracionUsuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.UpdatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.MonedaPrincipal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.MonedaPrincipal.Code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.FormatoFecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.FormatoFecha)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.NotificacionesActivas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.NotificacionesActivas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.Usuario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.Usuario.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ConfiguracionUsuario.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

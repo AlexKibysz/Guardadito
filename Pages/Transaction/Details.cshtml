@@ -1,0 +1,103 @@
+@page
+@model Guardadito.Pages.Transaction.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Transaccion</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.UpdatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Monto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Monto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.MontoConvertido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.MontoConvertido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Fecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Fecha)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Etiquetas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Etiquetas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Adjuntos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Adjuntos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Recurrente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Recurrente)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.MonedaOriginal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.MonedaOriginal.Code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.MonedaDestino)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.MonedaDestino.Code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Categoria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Categoria.Color)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Usuario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Usuario.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaccion.Cuenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaccion.Cuenta.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Transaccion.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

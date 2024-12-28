@@ -1,0 +1,114 @@
+@page
+@model Guardadito.Pages.Transaction.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].MontoConvertido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Etiquetas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Adjuntos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Recurrente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].MonedaOriginal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].MonedaDestino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaccion[0].Cuenta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Transaccion) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoConvertido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etiquetas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adjuntos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Recurrente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonedaOriginal.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonedaDestino.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cuenta.Nombre)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -19,14 +19,21 @@ public class CreateModel : PageModel
     public IActionResult OnGet()
     {
         ViewData["PresupuestoId"] = new SelectList(_context.Presupuestos, "Id", "Nombre");
+
         return Page();
     }
 
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid) return Page();
+        if (!ModelState.IsValid)
+        {
+            ViewData["PresupuestoId"] = new SelectList(_context.Presupuestos, "Id", "Nombre");
+            return Page();
+        }
 
+        // Ignorar la navegación para evitar problemas de validación
+        CategoriaPresupuesto.Presupuesto = null;
         _context.CategoriasPresupuesto.Add(CategoriaPresupuesto);
         await _context.SaveChangesAsync();
 

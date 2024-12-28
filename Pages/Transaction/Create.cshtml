@@ -1,0 +1,98 @@
+@page
+@model Guardadito.Pages.Transaction.CreateModel
+
+        @{
+        ViewData["Title"] = "Create";
+        }
+        
+        <h1>Create</h1>
+        
+    <h4>Transaccion</h4>
+    <hr />
+    <div class="row">
+    <div class="col-md-4">
+    <form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Transaccion.CreatedAt" class="control-label"></label>
+                <input asp-for="Transaccion.CreatedAt" class="form-control" />
+                <span asp-validation-for="Transaccion.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.UpdatedAt" class="control-label"></label>
+                <input asp-for="Transaccion.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Transaccion.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Transaccion.Monto" class="control-label"></label>
+                <input asp-for="Transaccion.Monto" class="form-control" />
+                <span asp-validation-for="Transaccion.Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Transaccion.MonedaOriginalId" class="control-label"></label>
+                <select asp-for="Transaccion.MonedaOriginalId" class ="form-control" asp-items="ViewBag.MonedaOriginalId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.MontoConvertido" class="control-label"></label>
+                <input asp-for="Transaccion.MontoConvertido" class="form-control" />
+                <span asp-validation-for="Transaccion.MontoConvertido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.MonedaDestinoId" class="control-label"></label>
+                <select asp-for="Transaccion.MonedaDestinoId" class ="form-control" asp-items="ViewBag.MonedaDestinoId"></select>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Transaccion.Fecha" class="control-label"></label>
+                <input asp-for="Transaccion.Fecha" class="form-control" />
+                <span asp-validation-for="Transaccion.Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Transaccion.CategoriaId" class="control-label"></label>
+                <select asp-for="Transaccion.CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.Etiquetas" class="control-label"></label>
+                <input asp-for="Transaccion.Etiquetas" class="form-control" />
+                <span asp-validation-for="Transaccion.Etiquetas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.Adjuntos" class="control-label"></label>
+                <input asp-for="Transaccion.Adjuntos" class="form-control" />
+                <span asp-validation-for="Transaccion.Adjuntos" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Transaccion.Recurrente" /> @Html.DisplayNameFor(model => model.Transaccion.Recurrente)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.Descripcion" class="control-label"></label>
+                <input asp-for="Transaccion.Descripcion" class="form-control" />
+                <span asp-validation-for="Transaccion.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.UsuarioId" class="control-label"></label>
+                <select asp-for="Transaccion.UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaccion.CuentaId" class="control-label"></label>
+                <select asp-for="Transaccion.CuentaId" class ="form-control" asp-items="ViewBag.CuentaId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

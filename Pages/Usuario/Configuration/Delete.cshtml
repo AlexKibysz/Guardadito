@@ -1,0 +1,58 @@
+@page
+@model Guardadito.Pages.Usuario.Configuration.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ConfiguracionUsuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.UpdatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.MonedaPrincipal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.MonedaPrincipal.Code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.FormatoFecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.FormatoFecha)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.NotificacionesActivas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.NotificacionesActivas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfiguracionUsuario.Usuario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfiguracionUsuario.Usuario.Email)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="ConfiguracionUsuario.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

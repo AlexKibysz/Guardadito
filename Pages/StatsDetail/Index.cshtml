@@ -1,0 +1,60 @@
+@page
+@model Guardadito.Pages.StatsDetail.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadisticaDetalle[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadisticaDetalle[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadisticaDetalle[0].Clave)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadisticaDetalle[0].Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadisticaDetalle[0].Estadistica)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.EstadisticaDetalle) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estadistica.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
