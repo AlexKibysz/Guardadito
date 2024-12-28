@@ -16,6 +16,7 @@ public class Presupuesto : BaseEntity
     [Range(0.01, double.MaxValue, ErrorMessage = "El monto total debe ser mayor a 0")]
     public decimal MontoTotal { get; set; }
 
+
     [Required(ErrorMessage = "La fecha de inicio es obligatoria")]
     public DateTime FechaInicio { get; set; }
 

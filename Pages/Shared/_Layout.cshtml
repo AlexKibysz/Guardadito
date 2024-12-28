@@ -2,285 +2,242 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guardadito - @ViewData["Title"]</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image" href="favicon.ico">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="~/lib/bootstrap/Slate/Styles/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/Slate/Styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css"></link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="~/lib/DataTables/css/datatables.min.css">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/Guardadito.styles.css" asp-append-version="true"/>
-    @await RenderSectionAsync("Styles", false)
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0">
-    <div class="container">
-        <!-- Brand -->
-        <a class="navbar-brand py-2" asp-page="/Index">
-            <i class="fas fa-piggy-bank"></i>
-            <span class="ms-2">Guardadito</span>
-        </a>
-
-        <!-- Toggler -->
-        <button class="navbar-toggler border-0 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Contenido -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Menú Izquierdo -->
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle py-2" href="#" data-bs-toggle="dropdown">
-                        <i class="fas fa-chart-line"></i>
-                        <span class="ms-1">Dashboard</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" asp-page="/Dashboard/General">
-                                <i class="fas fa-home"></i>
-                                <span class="ms-2">General</span>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <i class="fas fa-piggy-bank me-2"></i>Guardadito
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Dashboard Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dashboardDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-chart-line me-1"></i>Dashboard
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
+                                <li><a class="dropdown-item" asp-page="/Dashboard/Mensual">
+                                        <i class="fas fa-calendar-month me-2"></i>Informe Mensual</a></li>
+                                <li><a class="dropdown-item" asp-page="/Dashboard/Cuatrimestral">
+                                        <i class="fas fa-calendar-range me-2"></i>Informe Cuatrimestral</a></li>
+                                <li><a class="dropdown-item" asp-page="/Dashboard/Anual">
+                                        <i class="fas fa-calendar-alt me-2"></i>Informe Anual</a></li>
+                            </ul>
                         </li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Dashboard/Analytics">
-                                <i class="fas fa-chart-pie"></i>
-                                <span class="ms-2">Análisis Financiero</span>
+                        <!-- Finanzas Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="finanzasDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-wallet me-1"></i>Finanzas
                             </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Dashboard/Budget">
-                                <i class="fas fa-money-bill-wave"></i>
-                                <span class="ms-2">Presupuesto</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Dashboard/Goals">
-                                <i class="fas fa-bullseye"></i>
-                                <span class="ms-2">Metas Financieras</span>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Dashboard/Custom">
-                                <i class="fas fa-sliders-h"></i>
-                                <span class="ms-2">Personalizado</span>
-                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="finanzasDropdown">
+                                <li><a class="dropdown-item" asp-page="/Currency"><i
+                                            class="fas fa-coins me-2"></i>Monedas</a></li>
+                                <li><a class="dropdown-item" asp-page="/Categoria"><i
+                                            class="fas fa-tags me-2"></i>Categorías</a></li>
+                                <li><a class="dropdown-item" asp-page="/Cuenta"><i
+                                            class="fas fa-piggy-bank me-2"></i>Cuentas</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" asp-page="/Transaccion"><i
+                                            class="fas fa-exchange-alt me-2"></i>Transacciones</a></li>
+                                <li><a class="dropdown-item" asp-page="/Recordatorio"><i
+                                            class="fas fa-bell me-2"></i>Recordatorios</a></li>
+                            </ul>
                         </li>
                     </ul>
-                </li>
 
-                <!-- Administración -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle py-2" href="#" data-bs-toggle="dropdown">
-                        <i class="fas fa-wallet"></i>
-                        <span class="ms-1">Finanzas</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" asp-page="/Currency">
-                                <i class="fas fa-coins"></i>
-                                <span class="ms-2">Monedas</span>
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Notifications Dropdown -->
+                        <!-- Notifications Dropdown -->
+                        <li class="nav-item dropdown">
+                            <!-- Botón de notificaciones con badge -->
+                            <a class="nav-link position-relative px-2" href="#" id="notificationsDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bell fa-lg"></i>
+                                <span class="position-absolute top-25 start-75 translate-middle">
+                                    <span class="badge rounded-pill bg-danger"
+                                        style="width: 8px; height: 8px; padding: 0;">
+                                        <span class="visually-hidden">Hay notificaciones sin leer</span>
+                                    </span>
+                                </span>
                             </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Categoria">
-                                <i class="fas fa-tags"></i>
-                                <span class="ms-2">Categorías</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Cuenta">
-                                <i class="fas fa-piggy-bank"></i>
-                                <span class="ms-2">Cuentas</span>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Transaccion">
-                                <i class="fas fa-exchange-alt"></i>
-                                <span class="ms-2">Transacciones</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
 
-            <!-- Menú Derecho -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Notificaciones -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link position-relative py-2" href="#" data-bs-toggle="dropdown">
-                        <i class="fas fa-bell"></i>
-                        <span class="position-absolute top-0 end-0 p-1 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">Hay notificaciones</span>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end p-0" style="width: 320px">
-                        <!-- Header -->
-                        <div class="d-flex justify-content-between align-items-center p-2 border-bottom">
-                            <h6 class="mb-0">Notificaciones</h6>
-                            <div>
-                                <button class="btn btn-link btn-sm text-decoration-none p-0" title="Marcar todo como leído">
-                                    <i class="fas fa-check-double"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Lista de Notificaciones -->
-                        <div style="max-height: 300px; overflow-y: auto">
-                            <!-- Alertas -->
-                            <div class="notification-group">
-                                <div class="bg-secondary bg-gradient px-3 py-1">
-                                    <span class="text-primary fw-semibold">Alertas</span>
+                            <!-- Menú desplegable de notificaciones -->
+                            <div class="dropdown-menu dropdown-menu-end shadow-sm"
+                                aria-labelledby="notificationsDropdown" style="min-width: 320px; max-width: 400px;">
+                                <!-- Encabezado del menú -->
+                                <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+                                    <h6 class="mb-0 me-3">Notificaciones</h6>
+                                    <a href="#" class="small text-primary">Marcar todo como leído</a>
                                 </div>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3 border-bottom" href="#">
-                                    <div class="flex-shrink-0">
-                                        <i class="fas fa-exclamation-circle text-warning"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Saldo bajo en cuenta principal</p>
-                                        <small class="text-muted">Hace 5 minutos</small>
-                                    </div>
-                                </a>
-                            </div>
 
-                            <!-- Recordatorios -->
-                            <div class="notification-group">
-                                <div class="bg-secondary bg-gradient px-3 py-1">
-                                    <span class="text-primary fw-semibold">Recordatorios</span>
+                                <!-- Lista de notificaciones -->
+                                <div class="notification-list overflow-auto" style="max-height: 350px;">
+                                    <!-- Ejemplo de notificación -->
+                                    <a class="dropdown-item p-3 border-bottom" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-exclamation-circle text-warning fa-lg"></i>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-1 fw-semibold">Saldo bajo en cuenta principal</p>
+                                                <small class="text-muted">Hace 5 minutos</small>
+                                            </div>
+                                            <div class="ms-2">
+                                                <i class="fas fa-circle text-primary" style="font-size: 8px;"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- Más ejemplos de notificaciones -->
+                                    <a class="dropdown-item p-3 border-bottom" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-check-circle text-success fa-lg"></i>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-1 fw-semibold">Transferencia exitosa</p>
+                                                <small class="text-muted">Hace 1 hora</small>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3 border-bottom" href="#">
-                                    <div class="flex-shrink-0">
-                                        <i class="fas fa-clock text-info"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Pago de servicios pendiente</p>
-                                        <small class="text-muted">Vence en 2 días</small>
-                                    </div>
-                                </a>
-                            </div>
 
-                            <!-- Metas -->
-                            <div class="notification-group">
-                                <div class="bg-dark bg-gradient px-3 py-1">
-                                    <span class="text-primary fw-semibold">Metas</span>
+                                <!-- Footer del menú -->
+                                <div class="text-center border-top p-2">
+                                    <a class="small text-decoration-none" href="#">Ver todas las notificaciones</a>
                                 </div>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3 border-bottom" href="#">
-                                    <div class="flex-shrink-0">
-                                        <i class="fas fa-trophy text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">¡Meta de ahorro alcanzada!</p>
-                                        <small class="text-muted">Fondo de emergencia</small>
-                                    </div>
-                                </a>
                             </div>
-
-                            <!-- Sistema -->
-                            <div class="notification-group">
-                                <div class="bg-secondary px-3 py-1">
-                                    <span class="text-primary text-muted fw-semibold">Sistema</span>
-                                </div>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3 border-bottom" href="#">
-                                    <div class="flex-shrink-0">
-                                        <i class="fas fa-sync text-primary"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-2">
-                                        <p class="mb-0">Sincronización completada</p>
-                                        <small class="text-muted">Todas las cuentas actualizadas</small>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Footer -->
-                        <div class="p-1 border-top">
-                            <a href="/Notifications" class="btn btn-link btn-sm text-decoration-none w-100">
-                                Ver todas las notificaciones
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Usuario -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle py-2" href="#" data-bs-toggle="dropdown">
-                        <i class="fas fa-user"></i>
-                        <span class="ms-1">Mi Perfil</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user-circle"></i>
-                                <span class="ms-2">Ver Perfil</span>
-                            </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
+
+                        <!-- User Profile Dropdown -->
+                        <li class="nav-item dropdown ms-2">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                    style="width: 32px; height: 32px;">
+                                    <i class="fas fa-user text-primary"></i>
+                                </div>
+                                <span class="ms-2">Mi Perfil</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user-circle me-2"></i>Ver
+                                        Perfil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Preferencias</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#"><i
+                                            class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Settings Button (Offcanvas Trigger) -->
+                        <li class="nav-item ms-2">
+                            <button class="btn btn-link nav-link" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#settingsOffcanvas" aria-controls="settingsOffcanvas">
                                 <i class="fas fa-cog"></i>
-                                <span class="ms-2">Preferencias</span>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item text-danger" href="#">
-                                <i class="fas fa-sign-out-alt"></i>
-                                <span class="ms-2">Cerrar Sesión</span>
-                            </a>
+                            </button>
                         </li>
                     </ul>
-                </li>
-            </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="settingsOffcanvas"
+            aria-labelledby="settingsOffcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="settingsOffcanvasLabel">Configuración</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-palette me-2"></i>
+                                <span>Apariencia</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </a>
+                    <a asp-page="/Configs/Index" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-wrench me-2"></i>
+                                <span>Configuración</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
-</header>
+    </header>
 
-<main role="main" class="container flex-grow-1 py-4">
-    @RenderBody()
-</main>
+    <main role="main" class="container flex-grow-1 py-4">
+        @RenderBody()
+    </main>
 
-<!-- Scripts -->
-<script src="~/lib/jquery/js/jquery3.7.1.js"></script>
-<script src="https://unpkg.com/@@popperjs/core@2/dist/umd/popper.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Scripts -->
+    <script src="~/lib/jquery/js/jquery3.7.1.js"></script>
+    <script src="https://unpkg.com/@@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<!-- DataTables -->
-<script src="~/lib/DataTables/js/datatables.min.js"></script>
-<script src="~/lib/DataTables/lang/es.js"></script>
+    <!-- DataTables -->
+    <script src="~/lib/DataTables/js/datatables.min.js"></script>
+    <script src="~/lib/DataTables/lang/es.js"></script>
 
-<!-- Configuración global de DataTables -->
-<script>
-    $(document).ready(function () {
-        console.log('Iniciando configuración DataTables');
-        console.log('Archivo de lenguaje cargado:', typeof dataTableSpanish !== 'undefined');
+    <!-- Configuración global de DataTables -->
+    <script>
+        $(document).ready(function () {
+            console.log('Iniciando configuración DataTables');
+            console.log('Archivo de lenguaje cargado:', typeof dataTableSpanish !== 'undefined');
 
-        if (typeof dataTableSpanish !== 'undefined') {
-            $.extend(true, $.fn.dataTable.defaults, {
-                language: dataTableSpanish,
-                responsive: true,
-                pageLength: 10,
-                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]]
-            });
-            console.log('Configuración DataTables aplicada');
-        } else {
-            console.error('No se encontró la configuración de idioma para DataTables');
-        }
-    });
-</script>
+            if (typeof dataTableSpanish !== 'undefined') {
+                $.extend(true, $.fn.dataTable.defaults, {
+                    language: dataTableSpanish,
+                    responsive: true,
+                    pageLength: 10,
+                    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]]
+                });
+                console.log('Configuración DataTables aplicada');
+            } else {
+                console.error('No se encontró la configuración de idioma para DataTables');
+            }
+        });
+    </script>
 
-<!-- Site JS -->
-<script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Site JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-@await RenderSectionAsync("Scripts", false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

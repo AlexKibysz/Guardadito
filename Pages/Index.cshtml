@@ -133,39 +133,27 @@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        $(document).ready(function () {
-            // Inicialización de DataTable
-            $('#personasTable').DataTable({
-                initComplete: function () {
-                    // Busca el input de búsqueda y aplica clases de Bootstrap
-                    $('div.dataTables_filter input').addClass('form-control form-control-sm');
-                    $('div.dataTables_filter label').addClass('form-label');
-                },
-                pageLength: 10,
-                language: {
-                    search: "Buscar:",
-                    lengthMenu: "_MENU_ registros",
-                    zeroRecords: "No se encontraron resultados",
-                    info: "_PAGE_ de _PAGES_",
-                    infoEmpty: "No hay registros disponibles",
-                    infoFiltered: "(filtrado de _MAX_ registros totales)",
-                    paginate: {
-                        first: "Primero",
-                        last: "Último",
-                        next: "Siguiente",
-                        previous: "Anterior"
-                    }
-                },
-                responsive: true
-            });
-
-            // Configurar la búsqueda
-            $('#searchButton').on('click', function () {
-                var searchTerm = $('#searchInput').val();
-                var table = $('#personasTable').DataTable();
-                table.search(searchTerm).draw();
-            });
-        });
+       $(document).ready(function () {
+    // Inicialización básica de DataTable
+    $('#personasTable').DataTable({
+        pageLength: 10,
+        language: {
+            search: "Buscar:",
+            lengthMenu: "_MENU_ registros",
+            zeroRecords: "No se encontraron resultados",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            infoEmpty: "Mostrando 0 registros",
+            infoFiltered: "(filtrado de _MAX_ registros totales)",
+            paginate: {
+                first: "Primero",
+                last: "Último",
+                next: "Siguiente",
+                previous: "Anterior"
+            }
+        },
+        responsive: true
+    });
+});
 
         document.addEventListener('DOMContentLoaded', function () {
             // Gráfico de Barras

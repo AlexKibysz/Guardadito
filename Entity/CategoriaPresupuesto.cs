@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Guardadito.Entity;
 
@@ -13,11 +14,13 @@ public class CategoriaPresupuesto : BaseEntity
     public string Nombre { get; set; }
 
     [Required(ErrorMessage = "El monto asignado es obligatorio")]
-    [Range(0.01, double.MaxValue, ErrorMessage = "El monto asignado debe ser mayor a 0")]
+    [Column(TypeName = "decimal(18,6)")]
+    [Range(typeof(decimal), "0.000001", "999999999999.999999", ErrorMessage = "La tasa de cambio debe estar entre 0.000001 y 999999999999.999999")]
     public decimal MontoAsignado { get; set; }
 
     [Required(ErrorMessage = "El monto gastado es obligatorio")]
-    [Range(0, double.MaxValue, ErrorMessage = "El monto gastado debe ser mayor o igual a 0")]
+    [Column(TypeName = "decimal(18,6)")]
+    [Range(typeof(decimal), "0.000001", "999999999999.999999", ErrorMessage = "La tasa de cambio debe estar entre 0.000001 y 999999999999.999999")]
     public decimal MontoGastado { get; set; }
 
     // Relaciones

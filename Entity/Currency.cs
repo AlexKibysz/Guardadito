@@ -30,7 +30,7 @@ public class Currency : BaseEntity
 
     [Required(ErrorMessage = "La tasa de cambio es obligatoria")]
     [Column(TypeName = "decimal(18,6)")]
-    [Range(0.000001, 999999.999999, ErrorMessage = "La tasa de cambio debe estar entre 0.000001 y 999999.999999")]
+    [Range(typeof(decimal), "0.000001", "999999999999.999999", ErrorMessage = "La tasa de cambio debe estar entre 0.000001 y 999999999999.999999")]
     public decimal ExchangeRate { get; set; }
 
     [Required] public DateOnly RateDate { get; set; }

@@ -1,1 +1,8 @@
-{}
+{
+  "prettier.enableDebugLogs": true,
+  "prettier.requireConfig": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[razor]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
