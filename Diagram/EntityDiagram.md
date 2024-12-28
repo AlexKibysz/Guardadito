@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     class ReminderStatus {
         +int Id
@@ -202,3 +203,4 @@ classDiagram
 
     ConfiguracionUsuario "1" -- "1" Usuario : 1..1
     ConfiguracionUsuario "1" -- "0..1" Currency : MonedaPrincipal
+```
