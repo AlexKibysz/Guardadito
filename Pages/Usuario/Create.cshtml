@@ -1,63 +1,58 @@
 @page
-@model CreateModel
+@model Guardadito.Pages.Usuario.CreateModel
+@using System.Globalization
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Usuario";
+    var culture = new CultureInfo("es-AR");
 }
 
 <h1>Create</h1>
 
 <h4>Usuario</h4>
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Usuario.CreatedAt" class="control-label"></label>
-                <input asp-for="Usuario.CreatedAt" class="form-control"/>
-                <span asp-validation-for="Usuario.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Usuario.UpdatedAt" class="control-label"></label>
-                <input asp-for="Usuario.UpdatedAt" class="form-control"/>
-                <span asp-validation-for="Usuario.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Usuario.Nombre" class="control-label"></label>
-                <input asp-for="Usuario.Nombre" class="form-control"/>
-                <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Usuario.Email" class="control-label"></label>
-                <input asp-for="Usuario.Email" class="form-control"/>
-                <span asp-validation-for="Usuario.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Usuario.PasswordHash" class="control-label"></label>
-                <input asp-for="Usuario.PasswordHash" class="form-control"/>
-                <span asp-validation-for="Usuario.PasswordHash" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Usuario.Rol" class="control-label"></label>
-                <select asp-for="Usuario.Rol" class="form-control"></select>
-                <span asp-validation-for="Usuario.Rol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
-            </div>
-        </form>
+<hr />
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Crear Usuario</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-3">
+                    <span class="text-danger">*</span>
+                    <label asp-for="Usuario.Nombre" class="form-label"></label>
+                    <input asp-for="Usuario.Nombre" class="form-control" placeholder="Nombre de usuario" />
+                    <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <span class="text-danger">*</span>
+                    <label asp-for="Usuario.Email" class="form-label"></label>
+                    <input asp-for="Usuario.Email" class="form-control" placeholder="Correo electrónico" />
+                    <span asp-validation-for="Usuario.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <span class="text-danger">*</span>
+                    <label asp-for="Usuario.PasswordHash" class="form-label"></label>
+                    <input asp-for="Usuario.PasswordHash" class="form-control" type="password"
+             placeholder="Contraseña" />
+        <span asp-validation-for="Usuario.PasswordHash" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <span class="text-danger">*</span>
+                    <label asp-for="Usuario.RolId" class="form-label"></label>
+                    <select asp-for="Usuario.RolId" class="form-select" asp-items="ViewBag.RolId">
+                        <option value="">-- Seleccionar Rol --</option>
+                    </select>
+                    <span asp-validation-for="Usuario.RolId" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+                <a asp-page="Index" class="btn btn-secondary">Volver</a>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

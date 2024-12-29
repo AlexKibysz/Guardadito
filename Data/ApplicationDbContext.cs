@@ -57,11 +57,19 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(t => t.UsuarioId)
             .OnDelete(DeleteBehavior.Restrict);
 
+
         modelBuilder.Entity<Usuario>()
-            .HasMany(u => u.Metas)
-            .WithOne(m => m.Usuario)
-            .HasForeignKey(m => m.UsuarioId)
-            .OnDelete(DeleteBehavior.Restrict);
+       .HasOne(u => u.Rol)
+       .WithMany()
+       .HasForeignKey(u => u.RolId)
+       .OnDelete(DeleteBehavior.Restrict);
+
+
+        modelBuilder.Entity<Usuario>()
+                .HasMany(u => u.Metas)
+                .WithOne(m => m.Usuario)
+                .HasForeignKey(m => m.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Usuario>()
             .HasMany(u => u.Presupuestos)

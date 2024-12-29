@@ -4,9 +4,13 @@ namespace Guardadito.Entity;
 
 public class Usuario : BaseEntity
 {
-    public new Guid Id { get; set; }
-    public new DateTime CreatedAt { get; }
-    public new DateTime UpdatedAt { get; }
+    public Usuario()
+    {
+        Cuentas = new List<Cuenta>();
+        Transacciones = new List<Transaccion>();
+        Metas = new List<Meta>();
+        Presupuestos = new List<Presupuesto>();
+    }
 
 
     [Required(ErrorMessage = "El nombre es obligatorio")]
@@ -21,7 +25,9 @@ public class Usuario : BaseEntity
     public string PasswordHash { get; set; }
 
     [Required(ErrorMessage = "El rol es obligatorio")]
-    public UserRole Rol { get; set; }
+    public Guid RolId { get; set; }
+
+    public UserRole? Rol { get; set; }
 
     // Relaciones
     public ICollection<Cuenta> Cuentas { get; set; }
