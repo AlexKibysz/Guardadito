@@ -32,7 +32,7 @@
                             @Html.DisplayNameFor(model => model.Usuario[0].PasswordHash)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Usuario[0].Rol)
+                            @Html.DisplayNameFor(model => model.Usuario[0].Rol.Name)
                         </th>
                         <th>
 
@@ -59,7 +59,7 @@
                                 @Html.DisplayFor(modelItem => item.PasswordHash)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.RolId)
+                                @Html.DisplayFor(modelItem => item.Rol.Name)
                             </td>
                             <td>
                                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -80,4 +80,4 @@
             $('#usuariosTable').DataTable();
         });
     </script>
-} 
+}

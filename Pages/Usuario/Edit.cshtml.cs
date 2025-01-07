@@ -1,6 +1,7 @@
 using Guardadito.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Guardadito.Pages.Usuario;
@@ -20,32 +21,45 @@ public class EditModel : PageModel
     {
         if (id == null) return NotFound();
 
-        var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+        var usuario = await _context.Usuarios.Include(u => u.Rol).FirstOrDefaultAsync(m => m.Id == id);
         if (usuario == null) return NotFound();
         Usuario = usuario;
+
+        ViewData["RolId"] = new SelectList(_context.UserRole, "Id", "Name", Usuario.RolId);
         return Page();
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more information, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         if (!ModelState.IsValid) return Page();
 
-        _context.Attach(Usuario).State = EntityState.Modified;
+        var usuarioToUpdate = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == Usuario.Id);
 
-        try
+        if (usuarioToUpdate == null) return NotFound();
+
+        if (await TryUpdateModelAsync(
+            usuarioToUpdate,
+            "Usuario",
+            u => u.Nombre, u => u.Email, u => u.PasswordHash, u => u.RolId))
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!UsuarioExists(Usuario.Id)) return NotFound();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(Usuario.Id)) return NotFound();
 
-            throw;
+                throw;
+            }
+
+            return RedirectToPage("./Index");
         }
 
-        return RedirectToPage("./Index");
+        ViewData["RolId"] = new SelectList(_context.UserRole, "Id", "Name", Usuario.RolId);
+        return Page();
     }
 
     private bool UsuarioExists(Guid id)
