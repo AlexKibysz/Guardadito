@@ -23,27 +23,30 @@ public class ApplicationDbContext : DbContext
     public DbSet<EstadisticaDetalle> EstadisticasDetalle { get; set; }
 
     public DbSet<AccountType> AccountType { get; set; } = default!;
-
     public DbSet<CategoryType> CategoryType { get; set; } = default!;
-
     public DbSet<GoalStatus> GoalStatus { get; set; } = default!;
-
     public DbSet<Priority> Priority { get; set; } = default!;
-
     public DbSet<ReminderStatus> ReminderStatus { get; set; } = default!;
-
     public DbSet<ReminderType> ReminderType { get; set; } = default!;
-
     public DbSet<StatType> StatType { get; set; } = default!;
-
     public DbSet<TransactionCategory> TransactionCategory { get; set; } = default!;
-
     public DbSet<TransactionType> TransactionType { get; set; } = default!;
-
     public DbSet<UserRole> UserRole { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Categoria>()
+            .HasOne(c => c.CategoriaPadre)
+            .WithMany(c => c.SubCategorias)
+            .HasForeignKey(c => c.CategoriaPadreId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Categoria>()
+            .HasOne(c => c.TipoCategoria)
+            .WithMany()
+            .HasForeignKey(c => c.TipoCategoriaId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         // Configuración Usuario
         modelBuilder.Entity<Usuario>()
             .HasMany(u => u.Cuentas)
@@ -107,13 +110,6 @@ public class ApplicationDbContext : DbContext
             .HasOne(t => t.Cuenta)
             .WithMany(c => c.Transacciones)
             .HasForeignKey(t => t.CuentaId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        // Configuración Categoría
-        modelBuilder.Entity<Categoria>()
-            .HasOne(c => c.CategoriaPadre)
-            .WithMany(c => c.SubCategorias)
-            .HasForeignKey(c => c.CategoriaPadreId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // Configuración CategoriaPresupuesto

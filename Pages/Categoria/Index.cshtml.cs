@@ -18,6 +18,9 @@ public class IndexModel : PageModel
     public async Task OnGetAsync()
     {
         Categoria = await _context.Categorias
-            .Include(c => c.CategoriaPadre).ToListAsync();
+            .Include(c => c.CategoriaPadre)
+            .Include(c => c.TipoCategoria)
+            .OrderBy(c => c.Nombre)
+            .ToListAsync();
     }
 }
