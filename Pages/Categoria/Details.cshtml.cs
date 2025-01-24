@@ -20,15 +20,15 @@ public class DetailsModel : PageModel
     {
         if (id == null) return NotFound();
 
-        var categoria = await _context.Categorias.FirstOrDefaultAsync(m => m.Id == id);
+        var categoria = await _context.Categorias
+            .Include(c => c.TipoCategoria)
+            .Include(c => c.CategoriaPadre)
+            .Include(c => c.SubCategorias)
+            .FirstOrDefaultAsync(m => m.Id == id);
 
-        if (categoria is not null)
-        {
-            Categoria = categoria;
+        if (categoria == null) return NotFound();
 
-            return Page();
-        }
-
-        return NotFound();
+        Categoria = categoria;
+        return Page();
     }
 }

@@ -21,19 +21,17 @@ public class CreateModel : PageModel
     {
         Usuario = new Entity.Usuario
         {
-            // Inicializa las colecciones
             Cuentas = new List<Cuenta>(),
             Transacciones = new List<Transaccion>(),
             Metas = new List<Meta>(),
             Presupuestos = new List<Presupuesto>(),
         };
 
-        // Asegúrate de usar RolId como valor
         ViewData["RolId"] = new SelectList(_context.UserRole, "Id", "Name");
         return Page();
     }
 
-    // For more information, see https://aka.ms/RazorPagesCRUD.
+    //TODO: Agregar Validacion de Presupuesto si no supera al presupuesto restante del padre
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)

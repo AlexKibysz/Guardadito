@@ -3,6 +3,7 @@ using Guardadito.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Guardadito.Pages.Categoria;
@@ -43,7 +44,6 @@ public class CreateModel : PageModel
 
         // Categorías padre
         var categoriasRaiz = _context.Categorias
-            .Where(c => c.CategoriaPadreId == null)
             .Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),

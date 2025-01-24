@@ -2,66 +2,136 @@
 @model DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de Categoría";
 }
 
-<h1>Details</h1>
+<div class="container py-4">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="@Model.Categoria.Icono me-2"></i>@Model.Categoria.Nombre
+            </h4>
+            <div>
+                <a asp-page="./Edit" asp-route-id="@Model.Categoria.Id" class="btn btn-light me-2">
+                    <i class="fas fa-edit me-1"></i>Editar
+                </a>
+                <a asp-page="./Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Volver
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Información Básica</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4"><i class="fas fa-tag me-2"></i>Nombre</dt>
+                                <dd class="col-sm-8">@Model.Categoria.Nombre</dd>
 
-<div>
-    <h4>Categoria</h4>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.TipoCategoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.TipoCategoria)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Icono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Icono)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Color)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Color)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Presupuesto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Presupuesto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.CategoriaPadre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CategoriaPadre.Color)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.UpdatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.UpdatedAt)
-        </dd>
-    </dl>
+                                <dt class="col-sm-4"><i class="fas fa-list me-2"></i>Tipo</dt>
+                                <dd class="col-sm-8">@Model.Categoria.TipoCategoria?.Name</dd>
+
+                                <dt class="col-sm-4"><i class="fas fa-icons me-2"></i>Ícono</dt>
+                                <dd class="col-sm-8">
+                                    <i class="@Model.Categoria.Icono fa-2x"></i>
+                                </dd>
+
+                                <dt class="col-sm-4"><i class="fas fa-palette me-2"></i>Color</dt>
+                                <dd class="col-sm-8">
+                                    <div class="d-flex align-items-center">
+                                        <div class="color-box me-2"
+                                            style="width: 30px; height: 30px; background-color: @Model.Categoria.Color; border-radius: 6px;">
+                                        </div>
+                                        <span>@Model.Categoria.Color</span>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Información Financiera</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4"><i class="fas fa-money-bill-wave me-2"></i>Presupuesto</dt>
+                                <dd class="col-sm-8">@Model.Categoria.Presupuesto.ToString("C")</dd>
+
+                                <dt class="col-sm-4"><i class="fas fa-sitemap me-2"></i>Categoría Padre</dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.Categoria.CategoriaPadre != null)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <i class="@Model.Categoria.CategoriaPadre.Icono me-2"></i>
+                                            @Model.Categoria.CategoriaPadre.Nombre
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Sin categoría padre</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-4"><i class="fas fa-clock me-2"></i>Creado</dt>
+                                <dd class="col-sm-8">@Model.Categoria.CreatedAt.ToString("g")</dd>
+
+                                <dt class="col-sm-4"><i class="fas fa-edit me-2"></i>Actualizado</dt>
+                                <dd class="col-sm-8">@Model.Categoria.UpdatedAt.ToString("g")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.Categoria.SubCategorias?.Any() == true)
+                {
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-warning">
+                                <h5 class="mb-0"><i class="fas fa-folder-tree me-2"></i>Subcategorías</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Ícono</th>
+                                                <th>Presupuesto</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var sub in Model.Categoria.SubCategorias)
+                                            {
+                                                <tr>
+                                                    <td>@sub.Nombre</td>
+                                                    <td><i class="@sub.Icono"></i></td>
+                                                    <td>@sub.Presupuesto.ToString("C")</td>
+                                                    <td>
+                                                        <a asp-page="./Details" asp-route-id="@sub.Id"
+                                                            class="btn btn-sm btn-info">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Categoria.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+   

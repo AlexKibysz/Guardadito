@@ -2,69 +2,137 @@
 @model DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Categoría";
 }
 
-<h1>Delete</h1>
+<div class="container py-4">
+    <div class="card shadow border-danger">
+        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-trash me-2"></i>Eliminar Categoría</h4>
+            <a asp-page="./Index" class="btn btn-light">
+                <i class="fas fa-times me-1"></i>Cancelar
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <strong>¡Atención!</strong> Esta acción no se puede deshacer.
+                @if ((int)ViewData["SubcategoriasCount"] > 0)
+                {
+                    <br />
+                    <strong class="text-danger">Esta categoría tiene subcategorías asociadas.
+                        Las @ViewData["SubcategoriasCount"] subcategoría(s) no seran eliminadas
+                        </strong>
+                }
+            </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Categoria</h4>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.TipoCategoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.TipoCategoria)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Icono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Icono)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Color)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Color)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.Presupuesto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Presupuesto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.CategoriaPadre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CategoriaPadre.Color)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria.UpdatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.UpdatedAt)
-        </dd>
-    </dl>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-info-circle me-2"></i>Información Básica
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-tag me-1"></i>Nombre
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Model.Categoria.Nombre
+                                </dd>
 
-    <form method="post">
-        <input type="hidden" asp-for="Categoria.Id"/>
-        <input type="submit" value="Delete" class="btn btn-danger"/> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-list me-1"></i>Tipo
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Model.Categoria.TipoCategoria?.Name
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-icons me-1"></i>Ícono
+                                </dt>
+                                <dd class="col-sm-8">
+                                    <i class="@Model.Categoria.Icono fa-2x"></i>
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-palette me-1"></i>Color
+                                </dt>
+                                <dd class="col-sm-8">
+                                    <div class="d-flex align-items-center">
+                                        <div class="color-box me-2"
+                                            style="width: 30px; height: 30px; background-color: @Model.Categoria.Color; border-radius: 6px;">
+                                        </div>
+                                        <span>@Model.Categoria.Color</span>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-pie me-2"></i>Información Adicional
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-money-bill-wave me-1"></i>Presupuesto
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Model.Categoria.Presupuesto.ToString("C")
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-sitemap me-1"></i>Categoría Padre
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.Categoria.CategoriaPadre != null)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <i class="@Model.Categoria.CategoriaPadre.Icono me-2"></i>
+                                            @Model.Categoria.CategoriaPadre.Nombre
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Sin categoría padre</span>
+                                    }
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-clock me-1"></i>Creado
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Model.Categoria.CreatedAt.ToString("g")
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-edit me-1"></i>Actualizado
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Model.Categoria.UpdatedAt.ToString("g")
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" class="mt-4">
+                <input type="hidden" asp-for="Categoria.Id" />
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-danger btn-lg">
+                        <i class="fas fa-trash me-2"></i>Eliminar Categoría
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
