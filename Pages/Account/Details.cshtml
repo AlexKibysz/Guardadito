@@ -1,5 +1,5 @@
 @page
-@model DetailsModel
+@model Guardadito.Pages.Account.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -9,20 +9,8 @@
 
 <div>
     <h4>Cuenta</h4>
-    <hr/>
+    <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuenta.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cuenta.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuenta.UpdatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cuenta.UpdatedAt)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cuenta.Nombre)
         </dt>
@@ -42,30 +30,6 @@
             @Html.DisplayFor(model => model.Cuenta.SaldoDisponible)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuenta.LimiteCredito)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cuenta.LimiteCredito)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuenta.FechaCorte)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cuenta.FechaCorte)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuenta.FechaPago)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cuenta.FechaPago)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuenta.FechaApertura)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cuenta.FechaApertura)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cuenta.MonedaPrincipal)
         </dt>
         <dd class="col-sm-10">
@@ -76,6 +40,18 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Cuenta.Usuario.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cuenta.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cuenta.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cuenta.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cuenta.UpdatedAt)
         </dd>
     </dl>
 </div>

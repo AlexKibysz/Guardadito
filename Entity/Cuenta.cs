@@ -5,16 +5,14 @@ namespace Guardadito.Entity;
 
 public class Cuenta : BaseEntity
 {
-    public new Guid Id { get; set; }
-    public new DateTime CreatedAt { get; set; }
-    public new DateTime UpdatedAt { get; set; }
-
     [Required(ErrorMessage = "El nombre es obligatorio")]
     [StringLength(100, ErrorMessage = "El nombre no puede exceder los 100 caracteres")]
-    public string Nombre { get; set; }
+    public required string Nombre { get; set; }
 
-    [Required(ErrorMessage = "El tipo de cuenta es obligatorio")]
-    public AccountType TipoCuenta { get; set; }
+    [Required(ErrorMessage = "El Id Cuenta es obligatorio")]
+    public Guid TipoCuentaId { get; set; }
+
+    public AccountType? TipoCuenta { get; set; }
 
     [Required(ErrorMessage = "El saldo actual es obligatorio")]
     [Column(TypeName = "decimal(18,2)")]
@@ -26,21 +24,14 @@ public class Cuenta : BaseEntity
     [Range(0, double.MaxValue, ErrorMessage = "El saldo disponible debe ser mayor o igual a 0")]
     public decimal SaldoDisponible { get; set; }
 
+
     [Required(ErrorMessage = "La moneda principal es obligatoria")]
     public Guid MonedaPrincipalId { get; set; }
+    public Currency? MonedaPrincipal { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")] public decimal? LimiteCredito { get; set; }
-
-    public DateTime? FechaCorte { get; set; }
-
-    public DateTime? FechaPago { get; set; }
-
-    [Required(ErrorMessage = "La fecha de apertura es obligatoria")]
-    public DateTime FechaApertura { get; set; }
-
-    // Relaciones
-    public Currency MonedaPrincipal { get; set; }
     public Guid UsuarioId { get; set; }
-    public Usuario Usuario { get; set; }
-    public ICollection<Transaccion> Transacciones { get; set; }
+
+    public Usuario? Usuario { get; set; }
+
+    public ICollection<Transaccion>? Transacciones { get; set; }
 }

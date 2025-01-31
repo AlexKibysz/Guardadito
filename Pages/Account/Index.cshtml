@@ -1,97 +1,69 @@
 @page
-@model IndexModel
+@model Guardadito.Pages.Account.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cuentas";
 }
 
-<h1>Index</h1>
+<div class="container py-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-folder me-2"></i>Cuentas</h4>
+            <a asp-page="Create" class="btn btn-light">
+                <i class="fas fa-plus me-1"></i>Nueva Cuenta
+            </a>
+        </div>
+        <div class="card-body">
+            <table id="categoriasTable" class="table table-striped table-bordered" style="width:100%">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo Cuenta</th>
+                        <th>Saldo Actual</th>
+                        <th>Saldo Disponible</th>
+                        <th>Moneda PrincipalId</th>
+                        <th>Fecha Apertura</th>
+                        <th>Moneda Principal</th>
+                        <th>Nombre Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cuenta in Model.Cuenta)
+                    {
+                        <tr>
+                            <td>
+                                @cuenta.Nombre
+                            <td>
+                                    @cuenta.TipoCuentaId
+                            </td>
+                            <td>
+                                    @cuenta.SaldoActual
+                            </td>
+                            <td>
+                                    @cuenta.SaldoDisponible
+                            </td>
+                            <td>@cuenta.MonedaPrincipal.Name
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].UpdatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].SaldoActual)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].SaldoDisponible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].LimiteCredito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].FechaCorte)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].FechaPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].FechaApertura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].MonedaPrincipal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuenta[0].Usuario)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Cuenta)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaldoActual)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaldoDisponible)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LimiteCredito)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCorte)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaApertura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MonedaPrincipal.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Email)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+                            <td>@cuenta.Usuario.Nombre</td>
+                            <td class="">
+                                <div class="btn-group" role="group">
+                                    <a asp-page="./Edit" asp-route-id="@cuenta.Id" class="btn btn-sm" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-page="./Details" asp-route-id="@cuenta.Id" class="btn btn-sm" title="Detalles">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    <a asp-page="./Delete" asp-route-id="@cuenta.Id" class="btn btn-sm" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a asp-page="Transaccion/ByAccount" asp-route-cuentaId="@cuenta.Id" class="btn btn-sm">
+                                    </a>
+
+                            </td>>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

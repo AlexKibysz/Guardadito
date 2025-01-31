@@ -1,25 +1,32 @@
-using Guardadito.Data;
-using Guardadito.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Guardadito.Data;
+using Guardadito.Entity;
 
-namespace Guardadito.Pages.Account;
-
-public class IndexModel : PageModel
+namespace Guardadito.Pages.Account
 {
-    private readonly ApplicationDbContext _context;
-
-    public IndexModel(ApplicationDbContext context)
+    public class IndexModel : PageModel
     {
-        _context = context;
-    }
+        private readonly Guardadito.Data.ApplicationDbContext _context;
 
-    public IList<Cuenta> Cuenta { get; set; } = default!;
+        public IndexModel(Guardadito.Data.ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task OnGetAsync()
-    {
-        Cuenta = await _context.Cuentas
-            .Include(c => c.MonedaPrincipal)
-            .Include(c => c.Usuario).ToListAsync();
+        public IList<Cuenta> Cuenta { get; set; } = default!;
+
+        public async Task OnGetAsync()
+        {
+            Cuenta = await _context.Cuentas
+                .Include(c => c.TipoCuenta)
+                .Include(c => c.MonedaPrincipal)
+                .Include(c => c.Usuario).ToListAsync();
+        }
     }
 }

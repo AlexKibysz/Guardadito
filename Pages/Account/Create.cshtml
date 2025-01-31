@@ -1,83 +1,159 @@
 @page
-@model CreateModel
+@model Guardadito.Pages.Account.CreateModel
 
 @{
     ViewData["Title"] = "Crear Cuenta";
 }
 
+<div class="container">
+    <div class="col-md-8 py-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-folder-plus me-2"></i>Nueva Cuenta</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="Cuenta.Nombre" class="form-label">
+                            <i class="fas fa-tag me-1">
+                            </i>Nombre
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Cuenta.Nombre" class="form-control" />
+                        <span asp-validation-for="Cuenta.Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Cuenta.TipoCuenta" class="form-label">
+                            <i class="fas fa-list-alt me-1">
+                            </i>Tipo<span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="Cuenta.TipoCuenta" class="form-select">
+                            <option value="">Seleccione el tipo de cuenta</option>
+                            @foreach (var item in (ViewData["TipoCuenta"] as List<SelectListItem> ?? new
+                            List<SelectListItem>()))
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Cuenta.SaldoActual">
+                            <i class="fas fa-dollar-sign me-1">
+                            </i>Saldo Actual<span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Cuenta.SaldoActual" class="form-control" />
+                        <span asp-validation-for="Cuenta.SaldoActual" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Cuenta.SaldoDisponible">
+                            <i class="fas fa-dollar-sign me-1">
+                            </i>Saldo Disponible<span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Cuenta.SaldoDisponible" class="form-control" />
+                        <span asp-validation-for="Cuenta.SaldoDisponible" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Cuenta.MonedaPrincipalId">
+                            <i class="fas fa-coins me-1">
+                            </i>Moneda Principal<span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="Cuenta.MonedaPrincipalId" class="form-select">
+                            <option value="">Seleccione la moneda principal</option>
+                            @foreach (var item in (ViewData["MonedaPrincipalId"] as List<SelectListItem>))
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Cuenta.MonedaPrincipalId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Cuenta.UsuarioId">
+                            <i class="fas fa-coins me-1">
+                            </i>Moneda Principal<span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="Cuenta.UsuarioId" class="form-select">
+                            <option value="">Seleccione el Usuario</option>
+                            @foreach (var item in (ViewData["UsuarioId"] as List<SelectListItem>))
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Cuenta.UsuarioId" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Volver
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
 <h1>Create</h1>
 
 <h4>Cuenta</h4>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Cuenta.CreatedAt" class="control-label"></label>
-                <input asp-for="Cuenta.CreatedAt" class="form-control"/>
-                <span asp-validation-for="Cuenta.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cuenta.UpdatedAt" class="control-label"></label>
-                <input asp-for="Cuenta.UpdatedAt" class="form-control"/>
-                <span asp-validation-for="Cuenta.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Cuenta.Nombre" class="control-label"></label>
-                <input asp-for="Cuenta.Nombre" class="form-control"/>
+                <input asp-for="Cuenta.Nombre" class="form-control" />
                 <span asp-validation-for="Cuenta.Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Cuenta.SaldoActual" class="control-label"></label>
-                <input asp-for="Cuenta.SaldoActual" class="form-control"/>
+                <input asp-for="Cuenta.SaldoActual" class="form-control" />
                 <span asp-validation-for="Cuenta.SaldoActual" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Cuenta.SaldoDisponible" class="control-label"></label>
-                <input asp-for="Cuenta.SaldoDisponible" class="form-control"/>
+                <input asp-for="Cuenta.SaldoDisponible" class="form-control" />
                 <span asp-validation-for="Cuenta.SaldoDisponible" class="text-danger"></span>
             </div>
+            #region Moneda Principal
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Cuenta.MonedaPrincipalId" class="control-label"></label>
                 <select asp-for="Cuenta.MonedaPrincipalId" class="form-control"
-                        asp-items="ViewBag.MonedaPrincipalId"></select>
+                    asp-items="ViewBag.MonedaPrincipalId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="Cuenta.LimiteCredito" class="control-label"></label>
-                <input asp-for="Cuenta.LimiteCredito" class="form-control"/>
-                <span asp-validation-for="Cuenta.LimiteCredito" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cuenta.FechaCorte" class="control-label"></label>
-                <input asp-for="Cuenta.FechaCorte" class="form-control"/>
-                <span asp-validation-for="Cuenta.FechaCorte" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cuenta.FechaPago" class="control-label"></label>
-                <input asp-for="Cuenta.FechaPago" class="form-control"/>
-                <span asp-validation-for="Cuenta.FechaPago" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Cuenta.FechaApertura" class="control-label"></label>
-                <input asp-for="Cuenta.FechaApertura" class="form-control"/>
+                <input asp-for="Cuenta.FechaApertura" class="form-control" />
                 <span asp-validation-for="Cuenta.FechaApertura" class="text-danger"></span>
             </div>
+            #region Moneda Usuario
             <div class="form-group">
                 <label asp-for="Cuenta.UsuarioId" class="control-label"></label>
                 <select asp-for="Cuenta.UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Cuenta.TipoCuenta" class="control-label"></label>
-                <select asp-for="Cuenta.TipoCuenta" class="form-control" asp-items="ViewBag.TipoCuenta"></select>
+                <label asp-for="Cuenta.CreatedAt" class="control-label"></label>
+                <input asp-for="Cuenta.CreatedAt" class="form-control" />
+                <span asp-validation-for="Cuenta.CreatedAt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <label asp-for="Cuenta.UpdatedAt" class="control-label"></label>
+                <input asp-for="Cuenta.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Cuenta.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -86,7 +162,7 @@
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
-
+-->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
