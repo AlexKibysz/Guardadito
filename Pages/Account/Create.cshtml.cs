@@ -13,20 +13,30 @@ namespace Guardadito.Pages.Account
     public class CreateModel : PageModel
     {
         private readonly Guardadito.Data.ApplicationDbContext _context;
+        private readonly ILogger<CreateModel> _logger;
 
-        public CreateModel(Guardadito.Data.ApplicationDbContext context)
+        public CreateModel(Guardadito.Data.ApplicationDbContext context, ILogger<CreateModel> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public IActionResult OnGet()
         {
-            List<AccountType> accountTypes = _context.AccountType.ToList();
-            List<Entity.Currency> currencies = _context.Currencies.ToList();
-            List<Entity.Usuario> usuarios = _context.Usuarios.ToList();
-            ViewData["TipoCuenta"] = new SelectList(_context.AccountType, "Id", "Name");
-            ViewData["MonedaPrincipalId"] = new SelectList(_context.Currencies, "Id", "Code");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Nombre");
+            // Load data
+            var accountTypes = _context.AccountType.ToList();
+            var currencies = _context.Currencies.ToList();
+            var usuarios = _context.Usuarios.ToList();
+
+            // Log counts for debugging
+            _logger.LogInformation($"AccountTypes: {accountTypes.Count}");
+            _logger.LogInformation($"Currencies: {currencies.Count}");
+            _logger.LogInformation($"Usuarios: {usuarios.Count}");
+
+            // Fix: Change ViewData key to match what's used in the view
+            ViewData["TipoCuentaId"] = new SelectList(accountTypes, "Id", "Name");
+            ViewData["MonedaPrincipalId"] = new SelectList(currencies, "Id", "Code");
+            ViewData["UsuarioId"] = new SelectList(usuarios, "Id", "Nombre");
             return Page();
         }
 
